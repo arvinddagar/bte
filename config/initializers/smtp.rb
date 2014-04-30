@@ -1,5 +1,5 @@
 if Rails.env.staging? || Rails.env.production?
-  SMTP_SETTINGS = {
+  EMAIL_SETTINGS = {
     address: ENV.fetch('MAILGUN_SMTP_SERVER'), # example: 'smtp.sendgrid.net'
     authentication: :plain,
     domain: ENV.fetch('SMTP_DOMAIN'), # example: 'this-app.com'
