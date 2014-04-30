@@ -1,0 +1,4 @@
+$(<%= "ts#{@time_slot.id}" %>).fadeOut().remove();
+<% unless @tutor.time_slots.any? %>
+  $("input[id=tutor_lesson_duration]").prop('disabled', false);
+<% end %>

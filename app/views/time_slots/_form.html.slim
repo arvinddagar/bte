@@ -1,0 +1,4 @@
+= form_for TimeSlot.new, remote: true  do |f|
+  = select_for_time_with_weekday f, weekday
+  = f.submit 'Cancel', class: 'cancel'
+  = f.submit 'Save', class: 'save'

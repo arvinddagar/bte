@@ -1,4 +1,34 @@
-h1
-  | New tutor
-= render 'form'
-= link_to 'Back', tutors_path
+.row-fluid
+  .span5.offset1
+    h1.first-one= t('tutor.new.title')
+    ul.unstyled.checklist
+      - t('tutor.new.reasons').each do |reason|
+        li
+          i.icon-ok
+          = reason
+
+  .span5.offset1
+    = form_for @tutor do |f|
+      = render "shared/errors", object: f.object
+      = f.fields_for :user do |user|
+        = user.label :email
+        = user.email_field :email, placeholder: t('helpers.placeholder.user.email')
+
+        = user.label :password
+        = user.password_field :password
+
+      = f.label :name
+      = f.text_field :name, placeholder: t('helpers.placeholder.tutor.name')
+
+      .content-box
+        = f.fields_for :user do |user|
+          = user.label :tos_and_privacy_policy_agreement, class: "checkbox fineprint" do
+            = user.check_box :tos_and_privacy_policy_agreement
+
+            - tnc_link = link_to(t('terms-and-conditions'), terms_path)
+            - privacy_policy_link = link_to(t('privacy-policy'), privacy_path)
+
+            = t('helpers.label.user.tnc_and_privacy_policy_agreement', tnc_link: tnc_link, privacy_policy_link: privacy_policy_link).html_safe
+
+      .content-box.last-one
+        = f.button class: "btn btn-success"

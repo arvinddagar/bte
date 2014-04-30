@@ -25,6 +25,7 @@ gem 'slim'
 gem 'underscore-rails'
 gem 'font-awesome-rails'
 gem 'devise'
+gem 'chronic'
 
 group :development do
   gem 'foreman'

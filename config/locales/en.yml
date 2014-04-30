@@ -15,3 +15,5 @@ en:
     users:
       show: '%{user}'
       new: Registration
+    time_slots:
+      index: Manage Schedule

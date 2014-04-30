@@ -1,13 +1,17 @@
 .container-fluid
   nav.app-menu-user
     - if current_user
+      = button_to destroy_user_session_path, method: :delete, rel: "logout", role: "menuitem", tabindex: "-1" do
+        i.icon-remove
+        | &nbsp;
+          Logout
     - else
       = render "shared/login_modal"
       .navbar.navbar-fixed-top
         .navbar-inner
           .container
             .navbar-header
-              a.nav-center href="#"  Company Name
+              a.nav-center href="/"  Company Name
             a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
               span.icon-bar
               span.icon-bar

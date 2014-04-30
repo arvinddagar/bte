@@ -1,0 +1,20 @@
+.dashboard-student
+  .avatar-header.dashboard-header
+    h3= t('greeting', name: current_user.display_name)
+    p.last-one#online-tutors-count
+      strong= t('.find_tutors')
+
+  .content-box-mega.last-one
+    .row-fluid
+      .span5
+
+      .span6.offset1
+        .row-fluid
+          .span6
+            .content-box-mega.first-one
+              h3.first-one= t('.account_balance')
+          .span6
+            .content-box-mega.first-one
+              h3.first-one= t('.session_history')
+        h3.first-one= t('.favorite_tutors')
+          p.manage-favorites= t('accounts.student_dashboard.no_favorite_tutors_online')

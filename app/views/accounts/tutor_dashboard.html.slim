@@ -1,0 +1,35 @@
+.dashboard-tutor
+  .avatar-header.dashboard-header
+    .start-session-prompt
+      p.last-one
+        strong= t('.available')
+
+    .avatar
+      = image_tag current_user.default_avatar, width: 48, alt: 'avatar'
+    h3
+      = t('.welcome', name: current_user.display_name)
+    p.last-one#online-students-count
+      strong= t('.find_students')
+
+  .row-fluid
+    .span8
+      .row-fluid
+
+
+      .row-fluid
+
+
+    .span4
+      .content-box-mega.last-one
+        .sidebar-box
+          h4.first-one= t('.book_classes')
+          ul
+            li
+              a href="/faq#improve_rating"
+                = t('.how_to_improve')
+            li
+              a href="/time_slots"
+                = t('.manage_schedule')
+
+
+

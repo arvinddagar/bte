@@ -1,0 +1,35 @@
+.content-box.first-one
+  h1.first-one= t('tutor.complete-registration.title', name: current_user.display_name)
+  p= t('tutor.complete-registration.sub-title')
+
+= form_for @tutor, html: { class: "form-horizontal last-one" } do |f|
+  = render "shared/errors", object: f.object
+
+  .row-fluid
+    .span6
+      .content-box.last-one
+        .control-group
+          = f.label :name, class: "control-label"
+          .controls
+            = f.text_field :name
+
+        .control-group
+          = f.label :description, class: "control-label"
+          .controls
+            = f.text_area :description
+
+    .span5.offset1
+
+      fieldset
+        legend= t('helpers.label.tutor.avatar_url')
+        = link_to 'Upload Photo', "#", class: "btn", data: { "cl-file-input" => "tutor_avatar" }
+        #avatar_upload_progress.upload style="display:none"
+          br
+          strong Upload progress:
+          .progress.progress-success
+            .bar style="width: 0%; text-align: center;"
+          br
+          br
+
+  .form-actions
+    = f.submit 'Submit', class: "btn btn-success"

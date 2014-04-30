@@ -15,7 +15,6 @@ class TutorsController < ApplicationController
     @tutor = Tutor.new(tutor_params)
     if @tutor.save
       sign_in @tutor.user
-      # WelcomeMailer.new_tutor_email(@tutor.user.email).deliver
       redirect_to root_url
     else
       flash.now[:alert] = 'Error in registration'
@@ -45,9 +44,6 @@ class TutorsController < ApplicationController
   def update_tutor_params
     attrs = []
     attrs.push(*Tutor::COMPLETE_ATTRIBUTES)
-    attrs.push(*Tutor::LANGUAGE_ATTRS)
-    attrs.push(:avatar)
-    attrs.push(teaching_learner_profiles: [])
     params.require(:tutor).permit(attrs)
   end
 end

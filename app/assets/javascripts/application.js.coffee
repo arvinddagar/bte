@@ -3,6 +3,8 @@
 #= require jquery_ujs
 #= require bootstrap
 #= require underscore
+#= require jstz.min
+#= require jquery_plugins/jquery.cookie
 #= require_tree .
 
 if !window.MutationObserver?
@@ -12,7 +14,7 @@ if !window.MutationObserver?
 
 window.Bte ||= {}
 Bte.Views ||= {}
-Bte.Views.Welcome ||= {}
+Bte.Views.TimeSlots ||= {}
 
 Bte.log = (msg)-> console?.log?(msg) if Bte.DEBUG
 window.createTriggerFunctionFor =
@@ -23,6 +25,9 @@ window.createTriggerFunctionFor =
 
 Bte.init = ->
   (new Bte.UI).render()
+
+  #= Set timezone cookie ===
+  $.cookie 'tz_olson', jstz.determine().name(), { path: '/' }
 
   appData = $('body').data()
   currentUserData = $('#current-user').data()

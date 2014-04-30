@@ -4,6 +4,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :username, null: false
       t.integer :user_id, null: false
       t.hstore :properties
+      t.string :time_zone
       t.timestamps
     end
     add_index :students, :username, unique: true

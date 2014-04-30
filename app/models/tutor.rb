@@ -1,10 +1,12 @@
 # /app/models/tutor.rb
 class Tutor < ActiveRecord::Base
   PROPERTIES = [
-    :country
+    :description
   ]
   OTHER_REQUIRED_ATTRIBUTES = [
-    :name
+    :name,
+    :green_zone,
+    :weeks_visible
   ]
   COMPLETE_ATTRIBUTES = PROPERTIES +
     OTHER_REQUIRED_ATTRIBUTES
@@ -16,6 +18,8 @@ class Tutor < ActiveRecord::Base
   delegate :email, to: :user, allow_nil: true
   validates :name, presence: true
   validates *COMPLETE_ATTRIBUTES, presence: true, on: :update
+
+  has_many :time_slots, dependent: :destroy
 
   def avatar_url
     avatar && avatar.fullpath(

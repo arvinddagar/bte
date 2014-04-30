@@ -17,6 +17,11 @@ class User < ActiveRecord::Base
       email
   end
 
+  def timezone
+    tutor && tutor.time_zone ||
+      student && student.time_zone
+  end
+
   def type
     role.class.to_s.downcase.to_sym if role
   end

@@ -1,7 +1,7 @@
 # /app/models/student.rb
 class Student < ActiveRecord::Base
   PROPERTIES = [
-    :country
+    :description
   ]
 
   COMPLETE_ATTRIBUTES = PROPERTIES + [

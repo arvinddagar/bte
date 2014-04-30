@@ -20,7 +20,6 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     if @student.save!
       sign_in @student.user
-      # WelcomeMailer.new_student_email(@student.user.email).deliver
       redirect_to root_url
     else
       flash.now[:alert] = 'Error in registration. !!'

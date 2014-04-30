@@ -1,0 +1,24 @@
+.content-box.first-one
+  h1.first-one= t('student.complete-registration.title', name: current_user.display_name)
+  p= t('student.complete-registration.sub-title')
+
+= form_for @student, html: { class: "form-horizontal last-one" } do |f|
+  = render "shared/errors", object: f.object
+
+  .row-fluid
+    .span6
+      .content-box.last-one
+        .control-group
+          = f.label :username, class: "control-label"
+          .controls
+            = f.text_field :username
+
+        .control-group
+          = f.label :description, class: "control-label"
+          .controls
+            = f.text_area :description
+
+    .span5.offset1
+
+  .form-actions
+    = f.submit 'Submit', class: "btn btn-success"
