@@ -1,0 +1,33 @@
+/* This file compiles all styles into stylesheets/application.css */
+@charset 'utf-8';
+
+
+@import 'bourbon';
+@import 'neat';
+/* HTML 5 Boilerplate CSS: I only kept the HTML5BP stuff that wasn't made redundant by Bootstrap */
+@import "html5-boilerplate";
+
+/* We want Bootstrap to know about any custom fonts before the framework is loaded, so set these up here */
+@import "app/fonts";
+
+/*
+The vars style sheet allows you to tweak all the default Bootstrap variables before the framework is imported.
+Using no vars style sheet will just give you Bootstrap's default look and feel.
+You can also set up any other SASS vars your heart desires and use them in all subsequent style sheets.
+*/
+@import "app/vars";
+
+/* Import the Bootstrap stuff from the Gem */
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+/* If you are using an icon font, set it up here */
+@import "font-awesome";
+
+/* Awesome not covered by the aforementioned frameworks */
+@import "kickstand";
+
+/* Add any app-specific styles you need -- this is your "main" style sheet */
+@import "app/main";
+
+

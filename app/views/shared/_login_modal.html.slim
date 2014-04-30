@@ -1,0 +1,63 @@
+#modal-teacher-login-contact-form.modal.hide.fade
+  .modal-header
+    button#teacher_close_icon_modal.close data-dismiss="modal"  &times;
+    h3 Trainer Login
+  .modal-body
+    .row-fluid
+      .span12
+        = render 'shared/sign_in'
+    br
+      a#teacher_sign_up_link href=""  Trainer Sign up
+      #teacher_sign_up
+        = form_for Tutor.new(user: User.new) do |f|
+          = render "shared/errors", object: f.object
+          = f.fields_for :user do |user|
+            = user.label :email
+            = user.email_field :email, placeholder: 'Email'
+            = user.label :password, placeholder: 'Password'
+            = user.password_field :password
+          = f.label :name
+          = f.text_field :name, placeholder: 'Enter your full name'
+          .content-box.last-one
+            = f.button class: "btn btn-success"
+  .modal-footer
+    a#teacher_modal_close_button.btn data-dismiss="modal" href=""  Close
+/! end of teacher modal
+
+/! start of student modal
+#modal-student-login-contact-form.modal.hide.fade
+  .modal-header
+    button#student_close_icon_modal.close data-dismiss="modal"  &times;
+    h3 Student's Login
+  .modal-body
+    .row-fluid
+      .span6
+        = render 'shared/sign_in'
+      .span6
+        table
+          tr
+            td
+              b
+                | Log in with facebook
+          tr
+            td
+              = link_to image_tag('login_fb.png', height: 75, width: 200),'https://www.facebook.com/login.php'
+          tr
+            td colspan="2"
+              | We will not share any of your information without your permission
+    br
+      a#student_sign_up_link href=""  Student Sign up
+      #student_sign_up
+        = form_for Student.new(user: User.new) do |f|
+          = render "shared/errors", object: f.object
+          = f.fields_for :user do |user|
+            = user.label :email
+            = user.email_field :email, placeholder: 'Email'
+            = user.label :password, placeholder: 'Password'
+            = user.password_field :password
+          = f.label :username
+          = f.text_field :username, placeholder: 'Enter your full name'
+          .content-box.last-one
+            = f.button class: "btn btn-success"
+  .modal-footer
+    a#student_modal_close_button.btn data-dismiss="modal" href=""  Close

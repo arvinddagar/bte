@@ -1,0 +1,37 @@
+doctype html
+/[if lt IE 7]
+  | <html class="ie6" lang="en">
+/[if IE 7]
+  | <html class="ie7 oldie" lang="en">
+/[if IE 8]
+  | <html class="ie8 oldie" lang="en">
+/[if IE 9]
+  | <html class="ie9" lang="en">
+| <!--[if (gte IE 9)|!(IE)]<!--> <html lang="en"> <!--<![endif]-->
+
+head
+  title = title
+  = csrf_meta_tags
+  meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  meta name="apple-mobile-web-app-capable" content="yes"
+  meta charset="utf-8"
+  meta http-equiv="content-language" content="en"
+  meta name="description" content="............"
+
+  // CSS
+  = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+
+  // Modernizr needs to go in the document head
+  = javascript_include_tag "modernizr-2.6.2.min"
+
+body*app_data
+  - if current_user
+    #current-user*current_user_data
+  = render 'header'
+  .app-main-content
+    .container-fluid
+      = render 'flashes'
+      = yield
+
+  = render 'footer'
+  = render 'javascript'

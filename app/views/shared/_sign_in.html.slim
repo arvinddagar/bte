@@ -1,0 +1,10 @@
+= form_for :user, url: user_session_path, html: { class: "form-sign-in" } do |f|
+  .sign-in-username
+    = f.email_field :email, placeholder: 'Email'
+  .sign-in-password
+    = f.password_field :password, placeholder: 'Password'
+  = f.button 'Login', class: "btn btn-sign-in"
+  .form-options
+    = link_to 'Forgot Password', new_user_password_path, class: "fineprint forgot-password"
+    = f.label :remember_me, class: "checkbox fineprint remember-me" do
+      = f.check_box :remember_me

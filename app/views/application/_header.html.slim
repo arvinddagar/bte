@@ -1,0 +1,22 @@
+.container-fluid
+  nav.app-menu-user
+    - if current_user
+    - else
+      = render "shared/login_modal"
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            .navbar-header
+              a.nav-center href="#"  Company Name
+            a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            .collapse.nav-collapse
+              ul.nav.pull-right
+                li
+                  button.btn.btn-primary data-target="#modal-teacher-login-contact-form" data-toggle="modal" style="margin-left:15px;"
+                    | Teach a class
+                li
+                  button.btn.btn-primary data-target="#modal-student-login-contact-form" data-toggle="modal" style="margin-left:15px;"
+                    | Log in

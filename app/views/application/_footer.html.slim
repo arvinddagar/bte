@@ -1,0 +1,54 @@
+.app-footer
+  .container-fluid
+    .row-fluid
+      .span3
+        h4
+          u Company
+        a href=""  About Us
+        br
+          a href=""  Contact Us
+          br
+            a href=""  Blog
+            br
+              a href=""  Legal
+              br
+      .span3
+        h4
+          u Getting Started
+        a href=""  How it Works
+        br
+          a href=""  Trainer Profile Tip
+          br
+            a href=""  FAQs
+            br
+      .span2
+        h4
+          u Popular Cities
+        a href=""  Boston
+        br
+          a href=""  New York
+          br
+            a href=""  Los Angeles
+            br
+      .span2
+        h4
+          u Popular Classes
+        a href=""  Yoga
+        br
+          a href=""  Fitness
+          br
+            a href=""  Dance
+            br
+              a data-target="#modal-contact-form" data-toggle="modal" href=""  Contact us
+
+    nav
+      = link_to "#", class: "social" do
+        span.visuallyhidden= t('nav.twitter')
+        i.icon-twitter-sign
+      = link_to "#", class: "social" do
+        span.visuallyhidden= t('nav.facebook')
+        i.icon-facebook-sign
+
+  .container-fluid
+    p.fineprint.copyright
+      = t('nav.copyright', year: Time.now.year)
