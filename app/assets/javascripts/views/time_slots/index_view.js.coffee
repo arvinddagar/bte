@@ -17,6 +17,7 @@ class Bte.Views.TimeSlots.IndexView
 
   HideTimeSlot: (event)=>
     event.preventDefault()
+    alert(this)
     $('.time-slot-form').hide()
     $('a.add-time-slot').show()
     $(this).hide()
