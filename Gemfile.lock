@@ -124,8 +124,6 @@ GEM
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
       posix-spawn (~> 0.3.6)
-    haml (4.0.5)
-      tilt
     high_voltage (2.1.0)
     hike (1.2.3)
     hirb (0.7.1)
@@ -321,7 +319,6 @@ DEPENDENCIES
   font-awesome-rails
   foreman
   friendly_id (~> 5.0.0)
-  haml
   high_voltage
   jazz_hands
   jquery-rails

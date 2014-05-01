@@ -1,11 +1,16 @@
 class PurchasesController < ApplicationController
+  include ActionView::Helpers::NumberHelper
+  include PaymentsHelper
+
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
   def new
+    @purchase = Purchase.new
+    @tutor = Tutor.friendly.find(params[:tutor])
   end
 
   def create
-  # Amount in cents
+    # Amount in cents
     @amount = 500
 
     customer = Stripe::Customer.create(

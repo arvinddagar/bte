@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :purchases
-
   devise_for :users
 
     # STUDENTS
@@ -9,6 +7,7 @@ Rails.application.routes.draw do
     root 'accounts#student_dashboard', as: 'student_root'
     resources :students, only: [:update]
     resources :tutors, only: [:index, :show]
+    resources :purchases, only: [:new, :create]
     get 'complete_registration', to: 'students#complete_registration'
   end
 
@@ -16,9 +15,9 @@ Rails.application.routes.draw do
   authenticated :user, ->(u) { u.type == :tutor } do
     root 'accounts#tutor_dashboard', as: 'tutor_root'
     resources :students, only: [:index]
-    get 'complete_registration', to: 'tutors#complete_registration'
     resources :tutors, only: [:show, :update]
     resources :time_slots, only: [:index, :create, :destroy]
+    get 'complete_registration', to: 'tutors#complete_registration'
   end
 
   # VISITORS

@@ -2,7 +2,7 @@
   section
     ul.breadcrumb.color_white
       li
-        a href="index.html"  Home
+        a href="/"  Home
         span.divider
       li
         a href=""  Search Results
@@ -35,7 +35,7 @@
               a href=""  +12
     .span2
       .box
-        | Book Now
+        = link_to 'Book Now', new_purchase_path(tutor: @tutor)
         br
           | 4 spots left
   br

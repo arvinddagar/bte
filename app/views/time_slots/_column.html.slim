@@ -1,0 +1,7 @@
+- @tutor.time_slots.select{ |s| s.weekday == weekday }.sort.each do |time_slot|
+  .slot id="ts#{time_slot.id}"
+    = link_to "#{time_slot.starts_at_time} to #{time_slot.ends_at_time}", time_slot_path(time_slot), class: 'delete-time-slot', data: { remote: true, method: :delete, confirm: 'Delete this time slot?' }
+.time-slot-form
+  = render 'form', weekday: weekday
+= link_to '+', '#', class: 'add-time-slot', id: '+'
+.loading

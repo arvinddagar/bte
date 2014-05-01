@@ -1,0 +1,15 @@
+ul.breadcrumb
+  li
+    a href="/"  Home
+    span.divider /
+  li.active Buy Sessions
+
+.span3.offset1
+  .content-box-mini.first-one
+    .content-box-mini
+      = form_for @purchase, html: { class: 'stripe' } do |f|
+        script*stripe_script_attrs(@payment)
+        = f.hidden_field :payment_method, value: Purchase::PAYMENT_METHODS[:stripe]
+        = hidden_field_tag :stripeToken
+        button.btn.btn-large.btn-block.btn-payment
+          = image_tag "payments-cards.png", width: 153, height: 30, class: "cards-pay-image"
