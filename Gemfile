@@ -28,6 +28,7 @@ gem 'devise'
 gem 'chronic'
 gem 'friendly_id', '~> 5.0.0'
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 group :development do
   gem 'foreman'

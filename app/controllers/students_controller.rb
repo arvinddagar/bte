@@ -6,11 +6,6 @@ class StudentsController < ApplicationController
   before_filter :authenticate_user!,
                 only: [:index, :complete_registration, :update]
 
-  # GET /students
-  def index
-    @students = Student.all
-  end
-
   def new
     @student = Student.new
     @student.build_user
@@ -18,7 +13,7 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
-    if @student.save!
+    if @student.save
       sign_in @student.user
       redirect_to root_url
     else
