@@ -12,6 +12,9 @@ class Student < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :purchases
+  has_many :purchase_accounts
+
   accepts_nested_attributes_for :user
 
   validates :username, presence: true, uniqueness: true

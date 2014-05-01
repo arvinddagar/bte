@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501064315) do
+ActiveRecord::Schema.define(version: 20140501085809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,33 @@ ActiveRecord::Schema.define(version: 20140501064315) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "purchase_accounts", force: true do |t|
+    t.integer  "tutor_id"
+    t.integer  "student_id"
+    t.integer  "free_tokens"
+    t.integer  "comped_tokens"
+    t.integer  "paid_tokens",   default: 0
+    t.integer  "trial_tokens"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "purchase_accounts", ["student_id", "tutor_id"], name: "index_purchase_accounts_on_student_id_and_tutor_id", using: :btree
+
+  create_table "purchases", force: true do |t|
+    t.integer  "tutor_id"
+    t.integer  "student_id"
+    t.string   "stripe_charge_id"
+    t.text     "description"
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.integer  "lessons_purchased",                         default: 0
+    t.decimal  "amount",            precision: 7, scale: 2
+  end
+
+  add_index "purchases", ["student_id"], name: "index_purchases_on_student_id", using: :btree
+  add_index "purchases", ["tutor_id"], name: "index_purchases_on_tutor_id", using: :btree
 
   create_table "students", force: true do |t|
     t.string   "username",   null: false

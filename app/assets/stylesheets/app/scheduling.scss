@@ -466,3 +466,180 @@ table.history {
     }
   }
 }
+
+.button_form {
+  height: 31px;
+  width: 170%;
+}
+
+.text_over_image {
+  width: 100%;
+}
+
+.form_over_image {
+  z-index: 1;
+  margin-top: -20%;
+  position: absolute;
+  margin-left: 30%;
+}
+
+.page4_env {
+  height: 100px;
+  width: 200px;
+}
+
+.box_page4 {
+  height: 100px;
+  border-style: solid;
+  border-style: solid;
+  width: 100px;
+  border-radius: 10px;
+  padding: 10px 0 0 10px;
+}
+
+.img_rec {
+  width: 1200px;
+  height: 300px;
+}
+
+.your_profile {
+  margin-left: 50px;
+}
+
+.page4_texbox {
+  margin-left: 30px;
+}
+
+.menu {
+  padding: 0px;
+  font-size: 12px;
+  margin-left: 40px;
+}
+
+.leftmargin {
+  margin-left: 40px;
+}
+
+.minor_cateogry {
+  font-size: 12px;
+}
+
+.select_time {
+  width: 125px;
+}
+
+.navbar-header {
+  float: left;
+  /*padding: 15px;*/
+  text-align: center;
+  width: 100%;
+}
+
+.navbar-brand {
+  float: none;
+}
+
+.check_out {
+  color: silver;
+}
+
+.billing_text_box {
+  margin-top: 10px;
+  margin-left: 16px;
+  width: 270px;
+}
+
+.class_name_det {
+  margin-left: 100px;
+  width: 210px;
+  height: 150px;
+  background-color: silver;
+  padding: 10px;
+}
+
+.promo_code {
+  margin-left: 100px;
+}
+
+.bin_info_group {
+  margin-left: 30px;
+}
+
+.oval {
+  border-radius: 20px;
+}
+
+body {
+  padding-top: 5em;
+}
+
+.c-cta {
+  margin: 2em 0;
+}
+
+#testimonials {
+  position: relative;
+  .carousel-indicators {
+    top: -30px;
+    li {
+      background-color: #ccc;
+      &.active {
+        background-color: black;
+      }
+    }
+  }
+}
+
+.c-product-showcase {
+  margin-bottom: 2em;
+  .span4 {
+    margin-bottom: 2em;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .c-product-cta {
+    .btn-group {
+      float: none;
+    }
+    .span6 {
+      margin-bottom: 2em;
+    }
+  }
+}
+
+.color_white {
+  background-color: white;
+}
+
+.box {
+  border-style: solid;
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  padding: 10px 0 0 10px;
+}
+
+.box11 {
+  margin-top: 55px;
+}
+
+.ins_profile {
+  color: black;
+  margin-left: 50px;
+}
+
+.clip {
+  height: 50px;
+  width: 50px;
+}
+
+.clip_img {
+  margin-left: 50px;
+}
