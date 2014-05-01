@@ -1,4 +1,30 @@
-.container-fluid
+/ .container-fluid
+/   nav.app-menu-user
+/     - if current_user
+/       = button_to destroy_user_session_path, method: :delete, rel: "logout", role: "menuitem", tabindex: "-1" do
+/         i.icon-remove
+/         | &nbsp;
+/           Logout
+/     - else
+/       = render "shared/login_modal"
+/       .navbar.navbar-fixed-top
+/         .navbar-inner
+/           .container
+/             .navbar-header
+/               a.nav-center href="/"  Company Name
+/             a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+/               span.icon-bar
+/               span.icon-bar
+/               span.icon-bar
+/             .collapse.nav-collapse
+/               ul.nav.pull-right
+/                 li
+/                   button.btn.btn-primary data-target="#modal-teacher-login-contact-form" data-toggle="modal" style="margin-left:15px;"
+/                     | Teach a class
+/                 li
+/                   button.btn.btn-primary data-target="#modal-student-login-contact-form" data-toggle="modal" style="margin-left:15px;"
+/                     | Log in
+.container
   nav.app-menu-user
     - if current_user
       = button_to destroy_user_session_path, method: :delete, rel: "logout", role: "menuitem", tabindex: "-1" do
@@ -11,7 +37,8 @@
         .navbar-inner
           .container
             .navbar-header
-              a.nav-center href="/"  Company Name
+              br
+              a.nav-center href="/"  BTE
             a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
               span.icon-bar
               span.icon-bar
@@ -19,8 +46,8 @@
             .collapse.nav-collapse
               ul.nav.pull-right
                 li
-                  button.btn.btn-primary data-target="#modal-teacher-login-contact-form" data-toggle="modal" style="margin-left:15px;"
+                  button.btn.btn-primary data-target="#modal-teacher-login-contact-form" data-toggle="modal" style="margin-left:15px; margin-top:3%;"
                     | Teach a class
                 li
-                  button.btn.btn-primary data-target="#modal-student-login-contact-form" data-toggle="modal" style="margin-left:15px;"
+                  button.btn.btn-primary data-target="#modal-student-login-contact-form" data-toggle="modal" style="margin-left:15px; margin-top:3%"
                     | Log in
