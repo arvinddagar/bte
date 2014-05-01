@@ -5,7 +5,7 @@
 #= require underscore
 #= require jstz.min
 #= require jquery_plugins/jquery.cookie
-#= require_tree .
+#= require_directory .
 
 if !window.MutationObserver?
   class window.MutationObserver

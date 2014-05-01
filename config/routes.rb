@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users
 
-    # STUDENTS
+  # STUDENTS
   authenticated :user, ->(u) { u.type == :student } do
     root 'accounts#student_dashboard', as: 'student_root'
     resources :students, only: [:update]
@@ -25,5 +27,9 @@ Rails.application.routes.draw do
     resources :students, only: [:new, :create]
     resources :tutors, only: [:new, :create]
   end
+
+  # EVERYONE
+  resources :pages, except: :show
+  get ':id', to: 'pages#show', as: :static_page
   root 'welcome#index'
 end

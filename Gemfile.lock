@@ -41,6 +41,10 @@ GEM
       activesupport (= 4.1.0)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_admin_editor (1.1.0)
+      activeadmin (>= 0.4.0)
+      ejs
+      rails (>= 3.0.0)
     activemodel (4.1.0)
       activesupport (= 4.1.0)
       builder (~> 3.1)
@@ -123,6 +127,7 @@ GEM
     dotenv-deployment (0.0.2)
     dotenv-rails (0.11.1)
       dotenv (= 0.11.1)
+    ejs (1.1.1)
     email_validator (1.4.0)
       activemodel
     erubis (2.7.0)
@@ -149,7 +154,6 @@ GEM
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    high_voltage (2.1.0)
     hike (1.2.3)
     hirb (0.7.1)
     i18n (0.6.9)
@@ -343,6 +347,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_admin_editor
   activeadmin!
   airbrake
   awesome_print
@@ -363,7 +368,6 @@ DEPENDENCIES
   font-awesome-rails
   foreman
   friendly_id (~> 5.0.0)
-  high_voltage
   jazz_hands
   jquery-rails
   launchy

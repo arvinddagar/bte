@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w( modernizr-2.6.2.min.js )
+Rails.application.config.assets.precompile += %w( modernizr-2.6.2.min.js admin/active_admin.css admin/active_admin.js)
