@@ -3,15 +3,10 @@
     .row-fluid
       .span3
         h4
-          u Company
-        a href=""  About Us
-        br
-          a href=""  Contact Us
-          br
-            a href=""  Blog
-            br
-              a href=""  Legal
-              br
+          u Pages
+        - pages_list.each do |page|
+          li
+            = link_to_unless_current page.name, static_page_path(page.permalink)
       .span3
         h4
           u Getting Started

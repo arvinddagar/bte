@@ -1,4 +1,8 @@
 ActiveAdmin.register Page do
+  before_filter only: [:show] do
+    @page = Page.find_by(permalink: params[:id])
+  end
+
   form do |f|
     f.inputs do
       f.input :name
@@ -7,4 +11,12 @@ ActiveAdmin.register Page do
     end
     f.actions
   end
+
+  controller do
+    def permitted_params
+      params.permit :utf8, :_method, :_wysihtml5_mode, :authenticity_token, :commit, :id,
+          page: [:name, :permalink, :content]
+    end
+  end
+
 end

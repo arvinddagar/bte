@@ -1,9 +1,4 @@
 # /app/controllers/application_controller.rb
-class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-end
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
@@ -11,16 +6,21 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_user_with_incomplete_registration
   around_filter :set_time_zone
 
-  helper_method :current_student,
-    :current_tutor
+  helper_method :pages_list,
+                :current_student,
+                :current_tutor
 
   private
+
+  def pages_list
+    @pages ||= Page.all
+  end
 
   def set_time_zone
     if current_user.try(:tutor?) || current_user.try(:student?)
       Time.zone = current_user.timezone
     elsif cookies[:tz_olson]
-      Time.zone = OlsonTimezones.timezones_from_olson(cookies[:tz_olson]).first
+      Time.zone = ::OlsonTimezones.timezones_from_olson(cookies[:tz_olson]).first
     else
       Time.zone = 'UTC'
     end
