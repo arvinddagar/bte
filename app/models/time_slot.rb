@@ -58,6 +58,7 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def overlap
+    # binding.pry
     tutor.time_slots.each do |ts|
       errors.add(:base, 'Conflict with existing time slot') and return if overlaps?(ts)
     end

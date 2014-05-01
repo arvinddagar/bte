@@ -1,5 +1,9 @@
 # /app/models/tutor.rb
 class Tutor < ActiveRecord::Base
+  extend FriendlyId
+
+  friendly_id :name, use: :slugged
+
   PROPERTIES = [
     :description
   ]

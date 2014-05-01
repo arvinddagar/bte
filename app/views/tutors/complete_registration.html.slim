@@ -1,6 +1,10 @@
+ul.breadcrumb
+  li
+    a href="/"  Home
+    span.divider /
+  li.active Dashboard
 .content-box.first-one
-  h1.first-one= t('tutor.complete-registration.title', name: current_user.display_name)
-  p= t('tutor.complete-registration.sub-title')
+  h1.first-one= current_user.display_name
 
 = form_for @tutor, html: { class: "form-horizontal last-one" } do |f|
   = render "shared/errors", object: f.object

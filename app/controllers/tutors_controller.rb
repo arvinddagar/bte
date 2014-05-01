@@ -5,6 +5,7 @@ class TutorsController < ApplicationController
 
   before_filter :authenticate_user!,
                 only: [:index, :complete_registration, :update]
+  before_action :set_tutor, only: [:show]
 
   def new
     @tutor = Tutor.new
@@ -22,6 +23,9 @@ class TutorsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def complete_registration
     @tutor = current_user.tutor
   end
@@ -29,7 +33,7 @@ class TutorsController < ApplicationController
   def update
     @tutor = current_user.tutor
     if @tutor.update_attributes(update_tutor_params)
-      redirect_to root_url
+      redirect_to :complete_registration, notice: 'Profile Updated Successfully.'
     else
       render :complete_registration
     end
@@ -45,5 +49,10 @@ class TutorsController < ApplicationController
     attrs = []
     attrs.push(*Tutor::COMPLETE_ATTRIBUTES)
     params.require(:tutor).permit(attrs)
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tutor
+    @tutor = Tutor.friendly.find(params[:id])
   end
 end

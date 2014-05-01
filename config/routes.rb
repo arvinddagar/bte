@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :time_slots
 
   devise_for :users
 
@@ -9,7 +8,6 @@ Rails.application.routes.draw do
     resources :students, only: [:update]
     resources :tutors, only: [:index, :show]
     get 'complete_registration', to: 'students#complete_registration'
-    resources :students, only: [:update]
   end
 
   # TUTORS
@@ -17,7 +15,8 @@ Rails.application.routes.draw do
     root 'accounts#tutor_dashboard', as: 'tutor_root'
     resources :students, only: [:index]
     get 'complete_registration', to: 'tutors#complete_registration'
-    resources :tutors, only: [:update]
+    resources :tutors, only: [:show, :update]
+    resources :time_slots, only: [:index, :create, :destroy]
   end
 
   # VISITORS

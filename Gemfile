@@ -26,6 +26,9 @@ gem 'underscore-rails'
 gem 'font-awesome-rails'
 gem 'devise'
 gem 'chronic'
+gem 'haml' #Fix me
+gem 'friendly_id', '~> 5.0.0'
+gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 
 group :development do
   gem 'foreman'

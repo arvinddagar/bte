@@ -1,9 +1,9 @@
 <% if @time_slot.errors.any? %>
-  $('.flash').html('<%= escape_javascript render("time_slots/errors", :target => @time_slot) %>').fadeIn();
+  $('.flash').html('<%= escape_javascript render("time_slots/errors", target: @time_slot) %>').fadeIn();
   $('.loading').hide();
   $('a.add-time-slot').show()
 <% else %>
-  $('.time-slots').html('<%= escape_javascript render("time_slots/list", :tutor => @tutor) %>');
+  $('.time-slots').html('<%= escape_javascript render("time_slots/list", tutor: @tutor) %>');
   $('.flash').empty().fadeOut();
   $('input[id=tutor_lesson_duration]').prop('disabled', true);
 <% end %>

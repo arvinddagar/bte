@@ -1,0 +1,16 @@
+= form_for TimeSlot.new, remote: true  do |f|
+  = select_for_time_with_weekday f, weekday
+  = f.submit 'Cancel', class: 'cancel'
+  = f.submit 'Save', class: 'save'
+
+- content_for :javascript do
+  :javascript
+    $('input.cancel').click( function(e){
+      e.preventDefault();
+      $('.time-slot-form').hide();
+      $('a.add-time-slot').show();
+    });
+    $('input.save').click( function(e){
+      $('.time-slot-form').hide();
+      $(this).parents('td:first').find('.loading').show();
+    });

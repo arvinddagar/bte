@@ -25,11 +25,13 @@
           h4.first-one= t('.book_classes')
           ul
             li
-              a href="/faq#improve_rating"
-                = t('.how_to_improve')
+              a href="/complete_registration"
+                = t('.profile_update')
             li
               a href="/time_slots"
                 = t('.manage_schedule')
+            li
+              = link_to 'My Profile',tutor_path(current_user.tutor)
 
 
 

@@ -1,46 +1,32 @@
 class TimeSlotsController < ApplicationController
-  before_action :set_time_slot, only: [:show, :edit, :update, :destroy]
+  before_action :set_time_slot, only: [:destroy]
   before_filter :authenticate_user!
   before_filter :load_tutor
-
-  def create
-    @time_slot = @tutor.time_slots.build(time_slot_params)
-    @time_slot.save!
-    render nothing: true
-  end
-
+  respond_to :js, :json, :html
 
   # POST /time_slots
-  # def create
-  #   @time_slot = TimeSlot.new(time_slot_params)
-
-  #   if @time_slot.save
-  #     redirect_to @time_slot, notice: 'Time slot was successfully created.'
-  #   else
-  #     render :new
-  #   end
-  # end
-
+  def create
+    @time_slot = @tutor.time_slots.create(time_slot_params)
+  end
 
   # DELETE /time_slots/1
   def destroy
     @time_slot.destroy
-    render nothing: true
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_time_slot
-      @time_slot = TimeSlot.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_time_slot
+    @time_slot = TimeSlot.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def time_slot_params
-      params[:time_slot]
-    end
+  # Only allow a trusted parameter "white list" through.
+  def time_slot_params
+    params.require(:time_slot).permit(:starts_at_minutes)
+  end
 
-    def load_tutor
-      @tutor = current_user.tutor
-    end
+  def load_tutor
+    @tutor = current_user.tutor
+  end
 end
 

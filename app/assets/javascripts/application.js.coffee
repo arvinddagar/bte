@@ -14,7 +14,6 @@ if !window.MutationObserver?
 
 window.Bte ||= {}
 Bte.Views ||= {}
-Bte.Views.TimeSlots ||= {}
 
 Bte.log = (msg)-> console?.log?(msg) if Bte.DEBUG
 window.createTriggerFunctionFor =
