@@ -2,7 +2,6 @@ class TimeSlotsController < ApplicationController
   before_action :set_time_slot, only: [:destroy]
   before_filter :authenticate_user!
   before_filter :load_tutor
-  respond_to :js, :json, :html
 
   # POST /time_slots
   def create

@@ -1,5 +1,5 @@
 ActiveAdmin.register Page do
-  before_filter only: [:show] do
+  before_filter only: [:show, :edit] do
     @page = Page.find_by(permalink: params[:id])
   end
 
