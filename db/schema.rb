@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(version: 20140502081718) do
     t.string   "phone_number"
     t.integer  "level",                                 default: 0
     t.integer  "weeks_visible",                         default: 52
+    t.date     "start_date"
+    t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"

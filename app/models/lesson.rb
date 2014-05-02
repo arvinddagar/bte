@@ -5,7 +5,8 @@ class Lesson < ActiveRecord::Base
   LOCATION_ATTRIBUTES = [:lat, :long]
 
   COMPLETE_ATTRIBUTES = [ :name, :description, :location,
-                          :phone_number, :amount
+                          :phone_number, :amount,
+                          :start_date, :end_date
                         ]
   #validates *COMPLETE_ATTRIBUTES, presence: true
   enum level: [:beginner, :intermediate, :advanced]

@@ -12,6 +12,8 @@ class CreateLessons < ActiveRecord::Migration
       t.string :phone_number
       t.integer :level, default: 0
       t.integer :weeks_visible, default: 52
+      t.date :start_date
+      t.date :end_date
       t.timestamps
     end
   end
