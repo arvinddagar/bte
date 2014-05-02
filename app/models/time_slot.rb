@@ -4,9 +4,9 @@ class TimeSlot < ActiveRecord::Base
   #hash of minutes past midnight mapped to pretty time strings
   PRETTY_TIMES = Hash[(0..1439).map {|n| [n, "#{(n/60 == 0 || n/60 == 12 ? 12 : n/60 % 12)}:#{(n % 60).to_s.rjust(2,'0')} #{n/60 < 12 ? 'AM' : 'PM'}"]}]
 
-  belongs_to :tutor, counter_cache: true
-  delegate :time_zone, to: :tutor
-  validates_presence_of :tutor
+  # belongs_to :tutor, counter_cache: true
+  # delegate :time_zone, to: :tutor
+  # validates_presence_of :tutor
   validates :starts_at_minutes, inclusion: (0..(24*60*7-1))
   validates :lesson_duration, numericality: { greater_than: 0, less_than: 7*24*60 }
   validate :overlap, on: :create

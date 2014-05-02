@@ -9,10 +9,6 @@ body {
   height: 100%;
   padding-top: 5em;
 
-  @include breakpoint(mini-tablet) {
-    background: image_url("world.svg") no-repeat 50% 100% $bodyBackground;
-    background-size: contain;
-  }
   @include breakpoint(tablet) { background-position: 50% 125%; }
   @include breakpoint(desktop) { background-position: 50% 150%; }
   @include breakpoint(max) { background-position: 50% 200%; }
@@ -964,7 +960,7 @@ a.logo {
 .alert {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
   position: fixed;
-  top: 6%; left: 0;
+  margin-top: 6%; left: 0;
   width: 100%;
   z-index: 1000;
   border-color: $borderColor;

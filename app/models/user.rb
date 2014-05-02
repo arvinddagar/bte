@@ -3,13 +3,29 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook]
 
   has_one :student, dependent: :destroy
   has_one :tutor, dependent: :destroy
 
   accepts_nested_attributes_for :student, update_only: true
   accepts_nested_attributes_for :tutor, update_only: true
+
+  class << self
+    def find_for_facebook_oauth(auth)
+      student =  where(auth.slice(:provider, :uid)).first_or_create do |user|
+                user.provider = auth.provider
+                user.uid = auth.uid
+                user.email = auth.info.email
+                user.password = Devise.friendly_token[0,20]
+              end
+      student.skip_confirmation!
+      Student.find_or_create_by(username: auth.info.name) do |u|
+        u.user = student
+      end
+    end
+  end
 
   def display_name
     tutor && tutor.name ||

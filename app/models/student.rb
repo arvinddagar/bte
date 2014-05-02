@@ -8,8 +8,6 @@ class Student < ActiveRecord::Base
     :username
   ]
 
-  store_accessor :properties, *PROPERTIES
-
   belongs_to :user
 
   has_many :purchases

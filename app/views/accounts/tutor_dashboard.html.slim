@@ -2,7 +2,7 @@
   .avatar-header.dashboard-header
     .start-session-prompt
       p.last-one
-        strong= t('.available')
+        strong= link_to 'Create a New Class', new_lesson_path
 
     .avatar
       = image_tag current_user.default_avatar, width: 48, alt: 'avatar'
@@ -22,16 +22,14 @@
     .span4
       .content-box-mega.last-one
         .sidebar-box
-          h4.first-one= t('.book_classes')
+          h4.first-one Manage Classes
           ul
             li
               a href="/complete_registration"
                 = t('.profile_update')
             li
-              a href="/time_slots"
-                = t('.manage_schedule')
-            li
-              = link_to 'My Profile',tutor_path(current_user.tutor)
+              = link_to 'My Profile', tutor_path(current_user.tutor)
+
 
 
 

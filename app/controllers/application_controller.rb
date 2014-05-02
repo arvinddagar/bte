@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_user_with_incomplete_registration
-    return if current_user && current_user.admin?
     return if request.path == destroy_user_session_path
     if current_user && current_user.role && current_user.role.incomplete?
       redirect_to complete_registration_url

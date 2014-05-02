@@ -1,18 +1,13 @@
-User.find_or_create_by(email: "admin@bte.com") do |u|
-  u.admin = true
-  u.password = "password"
-end
-
 student = User.find_or_create_by(email: "student@bte.com") do |u|
   u.password = "password"
 end
-student.confirm!
+student.skip_confirmation!
 
 tutor = User.find_or_create_by(email: "tutor@bte.com") do |u|
   u.password = "password"
 end
 
-tutor.confirm!
+tutor.skip_confirmation!
 
 Student.find_or_create_by(username: "Jack") do |u|
   u.user = student

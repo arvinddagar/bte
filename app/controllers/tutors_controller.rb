@@ -33,7 +33,7 @@ class TutorsController < ApplicationController
   def update
     @tutor = current_user.tutor
     if @tutor.update_attributes(update_tutor_params)
-      redirect_to :complete_registration, notice: 'Profile Updated Successfully.'
+      redirect_to root_url, notice: 'Profile Updated Successfully.'
     else
       render :complete_registration
     end

@@ -41,7 +41,7 @@
                 | Log in with facebook
           tr
             td
-              = link_to image_tag('login_fb.png', height: 75, width: 200),'https://www.facebook.com/login.php'
+              = link_to image_tag('login_fb.png', height: 75, width: 200), user_omniauth_authorize_path(:facebook)
           tr
             td colspan="2"
               | We will not share any of your information without your permission

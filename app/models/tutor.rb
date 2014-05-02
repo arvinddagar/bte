@@ -8,22 +8,18 @@ class Tutor < ActiveRecord::Base
     :description
   ]
   OTHER_REQUIRED_ATTRIBUTES = [
-    :name,
-    :green_zone,
-    :weeks_visible
+    :name
   ]
   COMPLETE_ATTRIBUTES = PROPERTIES +
     OTHER_REQUIRED_ATTRIBUTES
 
-  store_accessor :properties, *PROPERTIES
   belongs_to :user
-  # has_attachment :avatar, accept: [:jpg, :png, :gif]
   accepts_nested_attributes_for :user
   delegate :email, to: :user, allow_nil: true
   validates :name, presence: true
   validates *COMPLETE_ATTRIBUTES, presence: true, on: :update
 
-  has_many :time_slots, dependent: :destroy
+  has_many :lessons, dependent: :destroy, inverse_of: :tutor
 
   def avatar_url
     avatar && avatar.fullpath(

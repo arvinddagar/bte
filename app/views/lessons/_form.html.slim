@@ -1,0 +1,12 @@
+.row
+  .form-actions
+    = form_for(@lesson) do |f|
+      = render 'shared/errors', object: f.object
+      .form-group
+        = f.label :name
+        = f.text_field :name
+      .field-group
+        = f.label :tutor_id
+        = f.text_field :tutor_id
+      .content-box.last-one
+        = f.submit 'Save', class: 'btn btn-success'
