@@ -6,7 +6,7 @@ class PurchasesController < ApplicationController
 
   def new
     @purchase = Purchase.new
-    @tutor = Tutor.friendly.find(params[:tutor])
+    @lesson = Lesson.friendly.find(params[:lesson])
   end
 
   def create

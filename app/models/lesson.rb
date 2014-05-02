@@ -6,7 +6,8 @@ class Lesson < ActiveRecord::Base
 
   COMPLETE_ATTRIBUTES = [ :name, :description, :location,
                           :phone_number, :amount,
-                          :start_date, :end_date
+                          :start_date, :end_date,
+                          :allowed_people
                         ]
   #validates *COMPLETE_ATTRIBUTES, presence: true
   enum level: [:beginner, :intermediate, :advanced]
@@ -21,6 +22,12 @@ class Lesson < ActiveRecord::Base
 
     def active_classes
       where('end_date >= ?', Date.today)
+    end
+
+    def search(search, page = 1)
+      wildcard_search = "%#{search}%"
+      where("location LIKE :search OR description LIKE :search OR name LIKE :search", search: wildcard_search)
+      .page(page)
     end
   end
 end

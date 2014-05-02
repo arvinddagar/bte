@@ -3,14 +3,168 @@ ul.breadcrumb
     a href="/"  Home
     span.divider /
   li.active Class
+.row-fluid
+  .span8
+    font size="10" = @lesson.name
+    | &nbsp&nbsp&nbsp&nbsp&nbsp
+    b
+      | with
+      = @lesson.tutor.name
+    br
+      br
+        b
+          = @lesson.location
+          br
+            = @lesson.start_date
+            br
+              | 7:00 - 8:00 am
+            a href=""  +12
+  .span2
+    b = number_to_currency(@lesson.amount)
+    br
+      | 7:00 - 8:00 am
+      br
+        | Wed,Oct 7
+        br
+          b
+            a href=""  +12
+  .span2
+    .box style="padding: 10px 0 0 10px;border-radius: 10px;margin-left:1px; height:75px;border-style: solid;width: 100px;"
+      = link_to 'Book Now', new_purchase_path(lesson: @lesson)
+      br
+        | 4 spots left
 
-p
-  strong
-    | Name:
-  = @lesson.name
-p
-  strong
-    | Tutor:
-  = @lesson.tutor
-= link_to 'Edit', edit_lesson_path(@lesson)
+br
+.row-fluid
+  .span10
+    ul.nav.nav-pills
+      li.active style="margin-left: -50%;"
+        a.brand href="index.html"  Class Description
+      li
+        a.brand href="index.html" style="margin-left:1px;"  Instructor
+      li
+        a.brand href="index.html" style="margin-left:1px;"  Reviews
+      li
+        a.brand href="index.html" style="margin-left:1px;"  Map
+      li
+        a.brand href="index.html" style="margin-left:1px;"  Pictures
+    br
+      b Class Description :
+      br
+        p
+          = @lesson.description
+        b
+          | Level: All
+          br
+          | Ages: All
+          br
+          | Avg Class Size : 10
+          br
+          | Attire: Comfortable
+  .span2
+    .box1 style="margin-top:50%;"
+      b
+        |Spread the Word
+      br
+      button.btn.btn-primary.btn-lg.btn-block type="button"  Invite a Friend
+      br
+      button.btn.btn-default type="button"  Like
+      br
+      br
+      button.btn.btn-primary type="button"  Twitter
 
+.row-fluid
+  .span10
+    .ins_profile
+      b Instructor Profile :
+      .row-fluid
+        .span2
+          br
+          =image_tag("env.png")
+
+        .span10
+          | HTML is written in the form of HTML elements consisting of tags enclosed
+          br
+            | in angle brackets (like). HTML tags most commonly come in pairs like  and
+            br
+              | , although some tags represent empty elements and so are unpaired, for
+              br
+                | example. The first tag in a pair is the start tag, and the second tag is the end tag
+                br
+                  | (they are also called opening tags and closing tags).
+                  br
+                    | The purpose of a web browser is to read HTML documents and compose them into visible
+                    br
+  .span2
+    h1
+      | GOOGLE MAP
+.row-fluid
+  .span10
+    .ins_profile
+      b 94 % Positive Reviews (137 Reviews ) :
+      .row-fluid
+        .span2
+          br
+          br
+            .clip_img
+              =image_tag("thums_up.jpg")
+
+        .span10
+          | HTML is written in the form of HTML elements consisting of tags enclosed
+          br
+            | in angle brackets (like). HTML tags most commonly come in pairs like  and
+            br
+              | , although some tags represent empty elements and so are unpaired, for
+              br
+                | example. The first tag in a pair is the start tag, and the second tag is the end tag
+                br
+                  | (they are also called opening tags and closing tags).
+                  br
+                    | The purpose of a web browser is to read HTML documents and compose them into visible
+                    br
+                      br
+                        | John Smith
+
+
+      .row-fluid
+        .span2
+          br
+          .clip_img
+            =image_tag("thums_up.jpg")
+        .span10
+          | HTML is written in the form of HTML elements consisting of tags enclosed
+          br
+            | in angle brackets (like). HTML tags most commonly come in pairs like  and
+            br
+              | , although some tags represent empty elements and so are unpaired, for
+              br
+                | example. The first tag in a pair is the start tag, and the second tag is the end tag
+                br
+                  | (they are also called opening tags and closing tags).
+                  br
+                    | The purpose of a web browser is to read HTML documents and compose them into visible
+                    br
+                      br
+                        | John Smith
+
+
+      .row-fluid
+        .span2
+          br
+          .clip_img
+            =image_tag("thums_up.jpg")
+        .span10
+          | HTML is written in the form of HTML elements consisting of tags enclosed
+          br
+            | in angle brackets (like). HTML tags most commonly come in pairs like  and
+            br
+              | , although some tags represent empty elements and so are unpaired, for
+              br
+                | example. The first tag in a pair is the start tag, and the second tag is the end tag
+                br
+                  | (they are also called opening tags and closing tags).
+                  br
+                    | The purpose of a web browser is to read HTML documents and compose them into visible
+                    br
+                      br
+                        | John Smith

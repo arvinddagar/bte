@@ -2,6 +2,14 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
+  def index
+    if params[:search]
+      @lessons = Lesson.search(params[:search], params[:page])
+    else
+      @lessons = Lesson.order(:location).page params[:page]
+    end
+  end
+
   # GET /lessons/1
   # GET /lessons/1.json
   def show

@@ -13,6 +13,7 @@ class CreateLessons < ActiveRecord::Migration
       t.integer :level, default: 0
       t.integer :weeks_visible, default: 52
       t.date :start_date
+      t.integer :allowed_people
       t.date :end_date
       t.timestamps
     end

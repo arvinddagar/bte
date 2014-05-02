@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   # EVERYONE
+  get 'search' => 'lessons#index'
   resources :pages, except: :show
   get ':id', to: 'pages#show', as: :static_page
   root 'welcome#index'
