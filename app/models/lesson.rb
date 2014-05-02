@@ -13,4 +13,14 @@ class Lesson < ActiveRecord::Base
   friendly_id :name, use: :slugged
   belongs_to :tutor, inverse_of: :lessons
   belongs_to :category
+
+  class << self
+    def past_classes
+      where('end_date < ?', Date.today)
+    end
+
+    def active_classes
+      where('end_date >= ?', Date.today)
+    end
+  end
 end

@@ -19,10 +19,10 @@
         = f.text_field :amount
       .field-group
         = f.label :start_date
-        = f.text_field :start_date
+        = f.date_field :start_date
       .field-group
         = f.label :end_date
-        = f.text_field :end_date
+        = f.date_field :end_date
       .field-group
         = f.label :category
         = select("lessons", "category", category_list.collect {|p| [ p.category_name, p.id ] }, {include_blank: 'None'})

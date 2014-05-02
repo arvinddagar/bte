@@ -4,7 +4,6 @@
 #= require bootstrap
 #= require underscore
 #= require jstz.min
-#= require jquery.ui.datepicker
 #= require jquery_plugins/jquery.cookie
 #= require_tree ./views
 #= require_directory .

@@ -7,12 +7,23 @@ class ApplicationController < ActionController::Base
 
   helper_method :pages_list,
                 :current_student,
-                :current_tutor
+                :current_tutor,
+                :category_list,
+                :started_pages_list,
+                :company_pages_list
 
   private
 
-  def pages_list
-    @pages ||= Page.all
+  def category_list
+    @categories ||= Category.main_categories
+  end
+
+  def company_pages_list
+    @company_pages ||= Page.company_pages
+  end
+
+  def started_pages_list
+    @started_pages ||= Page.started_pages
   end
 
   def set_time_zone

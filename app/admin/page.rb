@@ -7,6 +7,7 @@ ActiveAdmin.register Page do
     f.inputs do
       f.input :name
       f.input :permalink
+      f.input :pages_type, as: :select, collection: Page::PAGES_TYPE
       f.input :content, as: :html_editor
     end
     f.actions
@@ -15,7 +16,7 @@ ActiveAdmin.register Page do
   controller do
     def permitted_params
       params.permit :utf8, :_method, :_wysihtml5_mode, :authenticity_token, :commit, :id,
-          page: [:name, :permalink, :content]
+          page: [:name, :permalink, :content, :pages_type]
     end
   end
 

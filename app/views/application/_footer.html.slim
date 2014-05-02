@@ -3,19 +3,16 @@
     .row-fluid
       .span3
         h4
-          u Pages
-        - pages_list.each do |page|
+          u Company
+        - company_pages_list.each do |page|
           li
             = link_to_unless_current page.name, static_page_path(page.permalink)
       .span3
         h4
           u Getting Started
-        a href=""  How it Works
-        br
-          a href=""  Trainer Profile Tip
-          br
-            a href=""  FAQs
-            br
+        - started_pages_list.each do |page|
+          li
+            = link_to_unless_current page.name, static_page_path(page.permalink)
       .span2
         h4
           u Popular Cities

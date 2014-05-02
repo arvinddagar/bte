@@ -393,7 +393,6 @@ DEPENDENCIES
   friendly_id (~> 5.0.0)
   jazz_hands
   jquery-rails
-  jquery-ui-rails
   launchy
   letter_opener
   neat (~> 1.5.1)

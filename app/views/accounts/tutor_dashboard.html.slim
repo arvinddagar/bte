@@ -1,33 +1,124 @@
-.dashboard-tutor
-  .avatar-header.dashboard-header
-    .start-session-prompt
-      p.last-one
-        strong= link_to 'Create a New Class', new_lesson_path
-
-    .avatar
-      = image_tag current_user.default_avatar, width: 48, alt: 'avatar'
+.row-fluid
+  .span10
     h3
-      = t('.welcome', name: current_user.display_name)
-    p.last-one#online-students-count
-      strong= t('.find_students')
+      |Trainer Dashboard
+  .span2
+    .content-box-mega.last-one
+      .sidebar-box
+        a href="/complete_registration"
+          = t('.profile_update')
+br
+.row-fluid
+  .span10
+    ul.nav.nav-pills
+      li.active
+        a.brand href="#"  Active Class
+      li
+        a.brand href="#" style="margin-left:1px;"  Schedule
+      li
+        a.brand href="#" style="margin-left:1px;"  Class History
+      li
+        a.brand href="#" style="margin-left:1px;"  Inbox
+      li
+        a.brand href="#" style="margin-left:1px;"  Reviews
+      li
+        a.brand href="#" style="margin-left:1px;"  Performance
+      li
+        a.brand href="#" style="margin-left:1px;"  Finances
+      li
+        a.brand href="#" style="margin-left:1px;"  Setting
+  .span2
+    ul.nav.pull-right
+      li
+        button.btn.btn-primary.btn-lg style="margin-left:15px;" type="button"
+          = link_to 'Create a New Class', new_lesson_path
 
-  .row-fluid
-    .span8
-      .row-fluid
-      - @lessons.each do |lesson|
-        = lesson
+table cellpadding="10" width="100%"
+  tr
+    td
+      h4 Active Classes
+    td
+      h4 Date
+    td
+      h4 time
+    td
+      h4 Location
+    td
+      h4 Advertise
+    td
+      h4 Promo Codes
+    td
+      h4 Edit
+  - @active_classes.each do |active_class|
+    tr
+      td
+        .class_name style="margin-left: 30px;"
+          b = link_to active_class.name, lesson_path(active_class)
+      td
+        = active_class.start_date
+        |  -
+        = active_class.end_date
+      td
+        | show times
+      td
+        = active_class.location
+        br
+          a href=""  (see on Map)
+      td
+        a href=""  Social Media
+        br
+          a href=""  Email
+          br
+            a href=""  Flyer
+      td
+        a href=""  create discount code
+        br
+          a href=""  create Referral code
+      td
+        = link_to 'Edit', edit_lesson_path(active_class)
 
-      .row-fluid
-
-
-    .span4
-      .content-box-mega.last-one
-        .sidebar-box
-          h4.first-one Manage Classes
-          ul
-            li
-              a href="/complete_registration"
-                = t('.profile_update')
-
-
-
+br
+  br
+    table cellpadding="10" width="100%"
+      tr
+        td
+          h4 Past Classes
+        td
+          h4 Date
+        td
+          h4 time
+        td
+          h4 Location
+        td
+          h4 Reviews
+        td
+          h4 Students
+        td
+          h4 Sales
+      - @past_lessons.each do |past_class|
+        tr
+          td
+            .class_name style="margin-left: 30px;"
+              b = link_to past_class.name, lesson_path(past_class)
+          td
+            = past_class.start_date
+            |  -
+            = past_class.end_date
+          td
+            | show times
+          td
+            = past_class.location
+            br
+              a href=""  (see on Map)
+          td
+            a href=""  Social Media
+            br
+              a href=""  Email
+              br
+                a href=""  Flyer
+          td
+            a href=""  create discount code
+            br
+              a href=""  create Referral code
+          td
+            a href=""  Sales Page

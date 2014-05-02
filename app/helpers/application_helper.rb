@@ -26,8 +26,4 @@ module ApplicationHelper
   def javascript_view_name
     @javascript_view_name ||= "#{controller_path.camelcase.gsub('::', '_')}.#{action_name.camelcase}View"
   end
-
-  def category_list
-    @categories ||= Category.main_categories
-  end
 end
