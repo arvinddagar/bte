@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140502074746) do
+ActiveRecord::Schema.define(version: 20140502081718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20140502074746) do
     t.datetime "updated_at"
   end
 
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -100,6 +102,7 @@ ActiveRecord::Schema.define(version: 20140502074746) do
     t.integer  "weeks_visible",                         default: 52
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
   end
 
   add_index "lessons", ["tutor_id"], name: "index_lessons_on_tutor_id", using: :btree

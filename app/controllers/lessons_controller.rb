@@ -2,12 +2,6 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
-  # GET /lessons
-  # GET /lessons.json
-  def index
-    @lessons = Lesson.all
-  end
-
   # GET /lessons/1
   # GET /lessons/1.json
   def show
@@ -25,7 +19,7 @@ class LessonsController < ApplicationController
   # POST /lessons
   # POST /lessons.json
   def create
-    @lesson = Lesson.new(lesson_params)
+    @lesson = current_user.tutor.lessons.new(lesson_params)
 
     respond_to do |format|
       if @lesson.save
@@ -62,14 +56,22 @@ class LessonsController < ApplicationController
     end
   end
 
+  def sub_category
+    @subcategory = Category.where(parent_id: params[:parent_id])
+    render partial: 'subcategory' ,layout: false, locals: { subcategory: @subcategory }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
-      @lesson = Lesson.find(params[:id])
+      @lesson = Lesson.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lesson_params
-      params.require(:lesson).permit(:name, :tutor_id)
+      attrs = []
+      attrs.push(:category_id)
+      attrs.push(*Lesson::COMPLETE_ATTRIBUTES)
+      params.require(:lesson).permit(attrs)
     end
 end

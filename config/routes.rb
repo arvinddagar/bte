@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :time_slots, only: [:index, :create, :destroy]
     end
     get 'complete_registration', to: 'tutors#complete_registration'
+    get 'subcategory', to: 'lessons#sub_category'
   end
 
   # VISITORS

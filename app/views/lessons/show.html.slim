@@ -1,5 +1,9 @@
-p#notice
-  = notice
+ul.breadcrumb
+  li
+    a href="/"  Home
+    span.divider /
+  li.active Class
+
 p
   strong
     | Name:
@@ -9,5 +13,4 @@ p
     | Tutor:
   = @lesson.tutor
 = link_to 'Edit', edit_lesson_path(@lesson)
-|  | 
-= link_to 'Back', lessons_path
+

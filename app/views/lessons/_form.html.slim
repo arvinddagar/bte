@@ -6,7 +6,17 @@
         = f.label :name
         = f.text_field :name
       .field-group
-        = f.label :tutor_id
-        = f.text_field :tutor_id
+        = f.label :description
+        = f.text_field :description
+      .field-group
+        = f.label :phone_number
+        = f.text_field :phone_number
+      .field-group
+        = f.label :location
+        = f.text_field :location
+      .field-group
+        = f.label :category
+        = select("lessons", "category", category_list.collect {|p| [ p.category_name, p.id ] }, {include_blank: 'None'})
+      #subcategory
       .content-box.last-one
         = f.submit 'Save', class: 'btn btn-success'

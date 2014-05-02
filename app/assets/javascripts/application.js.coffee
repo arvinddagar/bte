@@ -5,6 +5,7 @@
 #= require underscore
 #= require jstz.min
 #= require jquery_plugins/jquery.cookie
+#= require_tree ./views
 #= require_directory .
 
 if !window.MutationObserver?
@@ -14,6 +15,7 @@ if !window.MutationObserver?
 
 window.Bte ||= {}
 Bte.Views ||= {}
+Bte.Views.Lessons ||= {}
 
 Bte.log = (msg)-> console?.log?(msg) if Bte.DEBUG
 window.createTriggerFunctionFor =

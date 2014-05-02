@@ -21,6 +21,10 @@ class Tutor < ActiveRecord::Base
 
   has_many :lessons, dependent: :destroy, inverse_of: :tutor
 
+  def to_s
+    name
+  end
+
   def avatar_url
     avatar && avatar.fullpath(
       width: 100,
