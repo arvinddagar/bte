@@ -1,25 +1,85 @@
-h1
-  | Listing lessons
-table
-  thead
-    tr
-      th
-        | Name
-      th
-        | Tutor
-      th[colspan="3"]
-  tbody
-    - @lessons.each do |lesson|
-      tr
-        td
-          = lesson.name
-        td
-          = lesson.tutor
-        td
-          = link_to 'Show', lesson
-        td
-          = link_to 'Edit', edit_lesson_path(lesson)
-        td
-          = link_to 'Destroy', lesson, method: :delete, data: { confirm: 'Are you sure?' }
+.row-fluid
+  .span6
+    h1 Major Category
+    | 300 classes near me
+  .span6
+    .row-fluid
+      .span4
+        .minor_cateogry
+          br
+          a href=""  Minor Category
+          br
+          a href=""  Minor Category
+          br
+          a href=""  Minor Category
+
+      .span4
+        .minor_cateogry
+          br
+          a href=""  Minor Category
+          br
+          a href=""  Minor Category
+          br
+          a href=""  Minor Category
+      .minor_cateogry
+        br
+        a href=""  Minor Category
+        br
+        a href=""  Minor Category
 br
-= link_to 'New Lesson', new_lesson_path
+br
+.row-fluid
+  form action=""
+    .span2
+      .btn-group
+        a.btn.btn-default href=""  class View
+        a.btn.btn-primary href=""  Map View
+    .span3
+      input.search-query.search_page_4 placeholder=("Other City or Zip") type="text"
+        span.glyphicon.glyphicon-search
+    .span3
+      | please put Map
+    .span2
+      select.select_time
+        option value="time"  Time of Day
+        option value="..."  ...
+        option value="..."  ...
+        option value="..."  ...
+    .span1
+      select.select_time
+        option value="..."  Sort by
+        option value="..."  ...
+        option value="..."  ...
+        option value="..."  ...
+
+- @lessons.each do |lesson|
+  hr
+    .row-fluid
+      .span3
+        =image_tag("env.png")
+      .span6
+        b
+          =lesson.name
+        br
+        b
+          | with
+          =lesson.tutor.name
+          | , Neighborhood(2.7 mi)
+        br
+        p
+          =lesson.description
+      .span2
+        b
+          = number_to_currency(lesson.amount, unit: '₹')
+
+        br
+        | 7:00 - 8:00 am
+        br
+        a hef=""  +12 more
+      .span1
+        .box_page4 style="padding: 10px 0 0 10px;border-radius: 10px;margin-left:1px; height:100px;border-style: solid;width: 100px;"
+          br
+          | Book Now
+          br
+          =lesson.allowed_people
+          | spots left

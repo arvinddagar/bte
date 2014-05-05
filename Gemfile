@@ -31,6 +31,7 @@ gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'active_admin_editor'
 gem 'kaminari'
+gem 'geocoder'
 
 group :development do
   gem 'foreman'

@@ -149,6 +149,7 @@ GEM
       actionpack (>= 3.0)
     friendly_id (5.0.3)
       activerecord (>= 4.0.0)
+    geocoder (1.1.9)
     grit (2.5.0)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
@@ -391,6 +392,7 @@ DEPENDENCIES
   font-awesome-rails
   foreman
   friendly_id (~> 5.0.0)
+  geocoder
   jazz_hands
   jquery-rails
   kaminari

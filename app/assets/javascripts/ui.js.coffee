@@ -4,6 +4,7 @@ class Bte.UI
     $('#student_sign_up').hide()
     $('#teacher_sign_up').hide()
 
+
     $(document)
       .on('click', '#teacher_sign_up_link',    @showTrainerModal)
       .on('click', '#student_sign_up_link',    @showStudentModal)

@@ -1,10 +1,12 @@
 # /app/models/lesson.rb
 class Lesson < ActiveRecord::Base
   extend FriendlyId
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 
-  LOCATION_ATTRIBUTES = [:lat, :long]
+  LOCATION_ATTRIBUTES = [:latitude, :longitude]
 
-  COMPLETE_ATTRIBUTES = [ :name, :description, :location,
+  COMPLETE_ATTRIBUTES = [ :name, :description, :address,
                           :phone_number, :amount,
                           :start_date, :end_date,
                           :allowed_people
@@ -26,7 +28,7 @@ class Lesson < ActiveRecord::Base
 
     def search(search, page = 1)
       wildcard_search = "%#{search}%"
-      where("location LIKE :search OR description LIKE :search OR name LIKE :search", search: wildcard_search)
+      where("address LIKE :search OR description LIKE :search OR name LIKE :search", search: wildcard_search)
       .page(page)
     end
   end

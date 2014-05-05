@@ -12,8 +12,9 @@
         = f.label :phone_number
         = f.number_field :phone_number
       .field-group
-        = f.label :location
-        = f.text_field :location
+        = f.label :address
+        = f.text_field :address, id: 'gmaps-input-address', placeholder: 'enter address'
+      #gmaps-canvas
       .field-group
         = f.label :amount
         = f.number_field :amount
@@ -32,3 +33,21 @@
       #subcategory
       .content-box.last-one
         = f.submit 'Save', class: 'btn btn-success'
+
+- content_for :javascript do
+  javascript:
+    jQuery(function() {
+      var completer;
+      completer = new GmapsCompleter({
+      inputField: '#gmaps-input-address',
+      errorField: '#gmaps-error',
+      mapElem: '#gmaps-canvas',
+      zoomLevel: 2,
+      mapType: google.maps.MapTypeId.ROADMAP,
+      pos: [51.751724, -1.255284],
+      debugOn: false
+      });
+      completer.autoCompleteInit({
+        country: 'us'
+      });
+    });
