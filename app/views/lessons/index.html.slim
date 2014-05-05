@@ -51,35 +51,34 @@ br
         option value="..."  ...
         option value="..."  ...
         option value="..."  ...
-
 - @lessons.each do |lesson|
-  hr
-    .row-fluid
-      .span3
-        =image_tag("env.png")
-      .span6
-        b
-          =lesson.name
-        br
-        b
-          | with
-          =lesson.tutor.name
-          | , Neighborhood(2.7 mi)
-        br
-        p
-          =lesson.description
-      .span2
-        b
-          = number_to_currency(lesson.amount, unit: '₹')
-
-        br
-        | 7:00 - 8:00 am
-        br
-        a hef=""  +12 more
-      .span1
-        .box_page4 style="padding: 10px 0 0 10px;border-radius: 10px;margin-left:1px; height:100px;border-style: solid;width: 100px;"
+  - if lesson.present?
+    hr
+      .row-fluid
+        .span3
+          =image_tag("env.png")
+        .span6
+          b
+            =lesson.name
           br
-          | Book Now
+          b
+            | with
+            / =lesson.tutor.name
+            | , Neighborhood(2.7 mi)
           br
-          =lesson.allowed_people
-          | spots left
+          p
+            = lesson.description
+        .span2
+          b
+            = number_to_currency(lesson.amount, unit: '₹')
+          br
+          | 7:00 - 8:00 am
+          br
+          a hef=""  +12 more
+        .span1
+          .box_page4 style="padding: 10px 0 0 10px;border-radius: 10px;margin-left:1px; height:100px;bord- style: solid;width: 100px;"
+            br
+            | Book Now
+            br
+            =lesson.allowed_people
+            | spots left

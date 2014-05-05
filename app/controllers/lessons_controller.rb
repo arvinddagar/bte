@@ -4,7 +4,14 @@ class LessonsController < ApplicationController
 
   def index
     if params[:search]
-      @lessons = Lesson.search(params[:search], params[:page])
+      @lessons = []
+      @lessons = Lesson.search(params[:search])
+      lessons_based_location = Lesson.near(params[:search])
+      if  lessons_based_location.length > 0
+        lessons_based_location.each do |lesson|
+          @lessons << lesson
+        end
+      end
     else
       @lessons = Lesson.order(:location).page params[:page]
     end

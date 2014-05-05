@@ -26,10 +26,9 @@ class Lesson < ActiveRecord::Base
       where('end_date >= ?', Date.today)
     end
 
-    def search(search, page = 1)
+    def search(search)
       wildcard_search = "%#{search}%"
       where("address LIKE :search OR description LIKE :search OR name LIKE :search", search: wildcard_search)
-      .page(page)
     end
   end
 end

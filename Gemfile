@@ -32,6 +32,7 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'active_admin_editor'
 gem 'kaminari'
 gem 'geocoder'
+gem 'acts_as_commentable_with_threading'
 
 group :development do
   gem 'foreman'
