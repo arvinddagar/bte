@@ -4,7 +4,7 @@ ul.breadcrumb
     span.divider /
   li.active Dashboard
 .content-box.first-one
-  h1.first-one= current_user.display_name
+  h1.first-one= current_user.name
 
 = form_for @tutor, html: { class: "form-horizontal last-one" } do |f|
   = render "shared/errors", object: f.object

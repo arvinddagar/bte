@@ -8,8 +8,9 @@ ul.breadcrumb
   .content-box-mini.first-one
     .content-box-mini
       = form_for @purchase, html: { class: 'stripe' } do |f|
-        script*stripe_script_attrs(@payment)
+        script*stripe_script_attrs(@lesson)
         = f.hidden_field :payment_method, value: Purchase::PAYMENT_METHODS[:stripe]
         = hidden_field_tag :stripeToken
+        = hidden_field_tag :lesson_id, @lesson.id
         button.btn.btn-large.btn-block.btn-payment
           = image_tag "payments-cards.png", width: 153, height: 30, class: "cards-pay-image"

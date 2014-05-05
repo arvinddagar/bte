@@ -1,5 +1,5 @@
 .content-box.first-one
-  h1.first-one= t('student.complete-registration.title', name: current_user.display_name)
+  h1.first-one= t('student.complete-registration.title', name: current_user.name)
   p= t('student.complete-registration.sub-title')
 
 = form_for @student, html: { class: "form-horizontal last-one" } do |f|

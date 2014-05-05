@@ -25,6 +25,16 @@ Rails.application.routes.draw do
     get 'subcategory', to: 'lessons#sub_category'
   end
 
+  authenticated :user do
+    resources :conversations, only: [:index, :show, :new, :create, :send] do
+      member do
+        post :reply
+        post :trash
+        post :untrash
+      end
+    end
+  end
+
   # VISITORS
   unauthenticated :user do
     resources :students, only: [:new, :create]

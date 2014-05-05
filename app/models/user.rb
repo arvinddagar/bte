@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :student, update_only: true
   accepts_nested_attributes_for :tutor, update_only: true
 
+  acts_as_messageable
+
   class << self
     def find_for_facebook_oauth(auth)
       student =  where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -27,10 +29,19 @@ class User < ActiveRecord::Base
     end
   end
 
-  def display_name
-    tutor && tutor.name ||
-      student && student.username ||
-      email
+  # def name
+  #   display_name
+  # end
+
+  def mailboxer_email(object)
+    email
+  end
+
+  def name
+    # tutor && tutor.name ||
+    #   student && student.username ||
+    #   email
+    email
   end
 
   def timezone
@@ -68,7 +79,7 @@ class User < ActiveRecord::Base
 
   def presence_info
     base_attrs = {
-      name: display_name
+      name: name
     }
     base_attrs.merge!(tutor.attrs) if tutor
     base_attrs.merge!(student.attrs) if student

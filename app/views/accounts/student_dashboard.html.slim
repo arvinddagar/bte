@@ -1,9 +1,9 @@
 .dashboard-student
   .avatar-header.dashboard-header
-    h3= t('greeting', name: current_user.display_name)
+    h3= t('greeting', name: current_user.name)
     p.last-one#online-tutors-count
       strong= t('.find_tutors')
-
+  = link_to 'My Conversations', :conversations
   .content-box-mega.last-one
     .row-fluid
       .span5

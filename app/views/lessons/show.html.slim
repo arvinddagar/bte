@@ -30,9 +30,10 @@ ul.breadcrumb
             a href=""  +12
   .span2
     .box style="padding: 10px 0 0 10px;border-radius: 10px;margin-left:1px; height:75px;border-style: solid;width: 100px;"
-      = link_to 'Book Now', new_purchase_path(lesson: @lesson)
+      = link_to 'Book Class Now', new_purchase_path(lesson: @lesson)
       br
         | 4 spots left
+      = link_to 'Ask a question', new_conversation_path(lesson: @lesson)
 
 br
 .row-fluid

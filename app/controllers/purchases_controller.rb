@@ -10,18 +10,16 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    # Amount in cents
-    @amount = 500
-
+    @lesson = Lesson.friendly.find(params[:lesson_id])
     customer = Stripe::Customer.create(
-      email: 'example@stripe.com',
+      email: current_user.email,
       card:  params[:stripeToken]
     )
 
     charge = Stripe::Charge.create(
       customer:    customer.id,
-      amount:      @amount,
-      description: 'Rails Stripe customer',
+      amount:      @lesson.amount * 100,
+      description: "Lesson Purchase Lesson Id: #{@lesson.id} Name #{lesson.name}",
       currency:    'usd'
     )
 
