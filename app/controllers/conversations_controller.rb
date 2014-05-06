@@ -1,3 +1,4 @@
+# /app/controllers/conversations_controller.rb
 class ConversationsController < ApplicationController
   before_filter :authenticate_user!
   helper_method :mailbox, :conversation
@@ -10,14 +11,16 @@ class ConversationsController < ApplicationController
     recipient_emails = conversation_params(:recipients).split(',')
     recipient = User.find_by(email: recipient_emails[0])
 
-    conversation = current_user.
-      send_message(recipient, *conversation_params(:body, :subject)).conversation
+    conversation = current_user
+      .send_message(recipient, *conversation_params(:body, :subject))
+      .conversation
 
     redirect_to conversation
   end
 
   def reply
-    current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+    current_user
+      .reply_to_conversation(conversation, *message_params(:body, :subject))
     redirect_to conversation
   end
 
@@ -54,7 +57,7 @@ class ConversationsController < ApplicationController
       case subkeys.size
       when 0 then self
       when 1 then self[subkeys.first]
-      else subkeys.map{|k| self[k] }
+      else subkeys.map { |k| self[k] }
       end
     end
   end

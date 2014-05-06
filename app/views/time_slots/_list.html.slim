@@ -26,7 +26,7 @@ table.calendar
         = render 'column', weekday: 'Saturday'
 - content_for :javascript do
   javascript:
-    $('a.add-time-slot').click( function(e){
+    $('a.add-time-slot').on('click', function(e){
       e.preventDefault();
       $('.time-slot-form').hide();
       $('a.add-time-slot').show();

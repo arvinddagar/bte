@@ -19,12 +19,6 @@
         = f.label :amount
         = f.number_field :amount
       .field-group
-        = f.label :start_date
-        = f.date_field :start_date
-      .field-group
-        = f.label :end_date
-        = f.date_field :end_date
-      .field-group
         = f.label :allowed_people
         = f.number_field :allowed_people
       .field-group
@@ -33,7 +27,7 @@
       #subcategory
       .content-box.last-one
         = f.submit 'Save', class: 'btn btn-success'
-
+    = link_to 'Manage Time Slots', lesson_time_slots_path(@lesson) if @lesson.persisted?
 - content_for :javascript do
   javascript:
     jQuery(function() {

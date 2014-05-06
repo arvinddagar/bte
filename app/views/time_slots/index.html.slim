@@ -9,7 +9,7 @@ ul.breadcrumb
     span(style="float:left")
       = image_tag("clock.png", width: "22px", style: "margin-bottom:-2px;")
       All times displayed in
-      = @tutor.time_zone
+      = @lesson.tutor.time_zone
 
     .tabs-wrapper
       .row
@@ -20,10 +20,10 @@ ul.breadcrumb
                 p
                   Use this tab to create your weekly availability schedule, set your advance notice, and set your schedule visibility. This should represent the times per week that you are accepting Bte reservations. Click the "+" button to create a new time slot. To delete a time slot, hover over it with your mouse and click when it turns red.
               .time-slots
-                = render 'list', tutor: @tutor
+                = render 'list', lesson: @lesson
               hr
               .form-actions
-                = form_for @tutor, method: :patch, remote: true do |f|
+                = form_for @lesson, method: :patch, remote: true do |f|
                   = f.select :green_zone, [1,2,3,6,12].each_with_object({}){ |c,h| h[c.to_s + " hour".pluralize(c)] = c*60 }.merge((1..10).to_a.each_with_object({}){ |c,h| h[c.to_s + " day".pluralize(c)] = c*60*24 }), label: "Advance Notice", hint: "For example, if you want at least a day's notice when a time slot is reserved, choose 1 day."
                   = f.select :weeks_visible, (1..52).each_with_object({}){|c,h| h[pluralize(c, "week")] = c}, label: "Schedule Visibility", hint: "The maximum number of weeks in the future a time slot can be reserved."
                   = f.submit "Save", data: {disable_with: 'Saving...'}, class: 'btn btn-success'

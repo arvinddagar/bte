@@ -13,26 +13,20 @@ class LessonsController < ApplicationController
         end
       end
     else
-      @lessons = Lesson.order(:location).page params[:page]
+      @lessons = Lesson.order(:address).page params[:page]
     end
   end
 
-  # GET /lessons/1
-  # GET /lessons/1.json
   def show
   end
 
-  # GET /lessons/new
   def new
     @lesson = Lesson.new
   end
 
-  # GET /lessons/1/edit
   def edit
   end
 
-  # POST /lessons
-  # POST /lessons.json
   def create
     @lesson = current_user.tutor.lessons.new(lesson_params)
 
@@ -47,8 +41,6 @@ class LessonsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /lessons/1
-  # PATCH/PUT /lessons/1.json
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
@@ -61,8 +53,6 @@ class LessonsController < ApplicationController
     end
   end
 
-  # DELETE /lessons/1
-  # DELETE /lessons/1.json
   def destroy
     @lesson.destroy
     respond_to do |format|
@@ -73,20 +63,19 @@ class LessonsController < ApplicationController
 
   def sub_category
     @subcategory = Category.where(parent_id: params[:parent_id])
-    render partial: 'subcategory' ,layout: false, locals: { subcategory: @subcategory }
+    render partial: 'subcategory', layout: false, locals: { subcategory: @subcategory }
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lesson
-      @lesson = Lesson.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def lesson_params
-      attrs = []
-      attrs.push(:category_id)
-      attrs.push(*Lesson::COMPLETE_ATTRIBUTES)
-      params.require(:lesson).permit(attrs)
-    end
+  def set_lesson
+    @lesson = Lesson.friendly.find(params[:id])
+  end
+
+  def lesson_params
+    attrs = []
+    attrs.push(:category_id)
+    attrs.push(*Lesson::COMPLETE_ATTRIBUTES)
+    params.require(:lesson).permit(attrs)
+  end
 end

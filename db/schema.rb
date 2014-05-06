@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506042226) do
+ActiveRecord::Schema.define(version: 20140506095336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,17 @@ ActiveRecord::Schema.define(version: 20140506042226) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "coupons", force: true do |t|
+    t.string   "code"
+    t.string   "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "discount_percentage"
+    t.boolean  "multiple_use",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -117,13 +128,14 @@ ActiveRecord::Schema.define(version: 20140506042226) do
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
-    t.decimal  "amount",         precision: 7, scale: 2
+    t.decimal  "amount",           precision: 7, scale: 2
     t.string   "phone_number"
-    t.integer  "level",                                  default: 0
-    t.integer  "weeks_visible",                          default: 52
-    t.date     "start_date"
+    t.integer  "level",                                    default: 0
+    t.integer  "green_zone",                               default: 1440
+    t.integer  "weeks_visible",                            default: 52
     t.integer  "allowed_people"
-    t.date     "end_date"
+    t.integer  "lesson_duration",                          default: 30,   null: false
+    t.integer  "time_slots_count",                         default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"
@@ -198,6 +210,9 @@ ActiveRecord::Schema.define(version: 20140506042226) do
   add_index "students", ["username"], name: "index_students_on_username", unique: true, using: :btree
 
   create_table "time_slots", force: true do |t|
+    t.integer  "lesson_id"
+    t.integer  "lesson_duration"
+    t.integer  "starts_at_minutes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

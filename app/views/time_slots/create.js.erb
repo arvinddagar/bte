@@ -3,7 +3,7 @@
   $('.loading').hide();
   $('a.add-time-slot').show()
 <% else %>
-  $('.time-slots').html('<%= escape_javascript render("time_slots/list", tutor: @tutor) %>');
+  $('.time-slots').html('<%= escape_javascript render("time_slots/list", lesson: @lesson) %>');
   $('.flash').empty().fadeOut();
   $('input[id=tutor_lesson_duration]').prop('disabled', true);
 <% end %>

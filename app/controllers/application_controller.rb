@@ -66,5 +66,4 @@ class ApplicationController < ActionController::Base
   def current_tutor
     current_user && current_user.tutor
   end
-
 end

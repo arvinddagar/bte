@@ -56,9 +56,9 @@ table cellpadding="10" width="100%"
         .class_name style="margin-left: 30px;"
           b = link_to active_class.name, lesson_path(active_class)
       td
-        = active_class.start_date
+        / = active_class.start_date
         |  -
-        = active_class.end_date
+        / = active_class.end_date
       td
         | show times
       td
@@ -102,9 +102,9 @@ br
             .class_name style="margin-left: 30px;"
               b = link_to past_class.name, lesson_path(past_class)
           td
-            = past_class.start_date
+            / = past_class.start_date
             |  -
-            = past_class.end_date
+            / = past_class.end_date
           td
             | show times
           td

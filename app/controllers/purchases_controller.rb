@@ -1,3 +1,4 @@
+# /app/controllers/purchases_controller.rb
 class PurchasesController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include PaymentsHelper
@@ -15,11 +16,11 @@ class PurchasesController < ApplicationController
       email: current_user.email,
       card:  params[:stripeToken]
     )
-
-    charge = Stripe::Charge.create(
+    description = "Lesson Purchase Lesson Id: #{@lesson.id} Name #{lesson.name}"
+    Stripe::Charge.create(
       customer:    customer.id,
       amount:      @lesson.amount * 100,
-      description: "Lesson Purchase Lesson Id: #{@lesson.id} Name #{lesson.name}",
+      description: description,
       currency:    'usd'
     )
 
@@ -29,13 +30,14 @@ class PurchasesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_purchase
-      @purchase = Purchase.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def purchase_params
-      params[:purchase]
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_purchase
+    @purchase = Purchase.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def purchase_params
+    params[:purchase]
+  end
 end

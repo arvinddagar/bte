@@ -1,3 +1,4 @@
+# /app/admin/page.rb
 ActiveAdmin.register Page do
   before_filter only: [:show, :edit] do
     @page = Page.find_by(permalink: params[:id])
@@ -15,9 +16,9 @@ ActiveAdmin.register Page do
 
   controller do
     def permitted_params
-      params.permit :utf8, :_method, :_wysihtml5_mode, :authenticity_token, :commit, :id,
-          page: [:name, :permalink, :content, :pages_type]
+      params.permit :utf8, :_method, :_wysihtml5_mode,
+                    :authenticity_token, :commit, :id,
+                    page: [:name, :permalink, :content, :pages_type]
     end
   end
-
 end

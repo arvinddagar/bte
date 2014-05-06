@@ -1,7 +1,7 @@
 # /app/models/page.rb
 class Page < ActiveRecord::Base
   validates_uniqueness_of :permalink
-  PAGES_TYPE = %w[Company Started]
+  PAGES_TYPE = %w(Company Started)
 
   class << self
     def company_pages
