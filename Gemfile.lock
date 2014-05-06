@@ -58,6 +58,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts_as_commentable (4.0.1)
     addressable (2.3.6)
     airbrake (3.1.16)
       builder
@@ -384,6 +385,7 @@ PLATFORMS
 DEPENDENCIES
   active_admin_editor
   activeadmin!
+  acts_as_commentable
   airbrake
   awesome_print
   better_errors

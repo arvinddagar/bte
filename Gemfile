@@ -33,6 +33,7 @@ gem 'active_admin_editor'
 gem 'kaminari'
 gem 'geocoder'
 gem 'mailboxer'
+gem 'acts_as_commentable'
 
 group :development do
   gem 'foreman'

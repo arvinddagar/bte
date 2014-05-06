@@ -1,6 +1,8 @@
 # /app/models/lesson.rb
 class Lesson < ActiveRecord::Base
   extend FriendlyId
+
+  acts_as_commentable
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
