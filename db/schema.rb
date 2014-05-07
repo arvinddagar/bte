@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506095336) do
+ActiveRecord::Schema.define(version: 20140507050750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20140506095336) do
     t.string   "phone_number"
     t.integer  "level",                                    default: 0
     t.integer  "green_zone",                               default: 1440
-    t.integer  "weeks_visible",                            default: 52
+    t.integer  "weeks_visible",                            default: 1
     t.integer  "allowed_people"
     t.integer  "lesson_duration",                          default: 30,   null: false
     t.integer  "time_slots_count",                         default: 0
@@ -175,11 +175,28 @@ ActiveRecord::Schema.define(version: 20140506095336) do
   add_index "pages", ["permalink"], name: "index_pages_on_permalink", using: :btree
 
   create_table "purchase_accounts", force: true do |t|
+    t.integer  "lesson_id"
+    t.integer  "student_id"
+    t.integer  "free_tokens",   default: 0
+    t.integer  "comped_tokens", default: 0
+    t.integer  "paid_tokens",   default: 0
+    t.integer  "trial_tokens",  default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "purchases", force: true do |t|
+    t.integer  "lesson_id"
+    t.integer  "student_id"
+    t.string   "stripe_charge_id"
+    t.string   "description"
+    t.string   "payment_method"
+    t.integer  "lessons_purchased",                                  default: 0
+    t.decimal  "amount",                     precision: 7, scale: 2
+    t.integer  "original_lessons_purchased"
+    t.integer  "coupon_id"
+    t.decimal  "original_amount",            precision: 7, scale: 2
+    t.integer  "discounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -197,6 +214,19 @@ ActiveRecord::Schema.define(version: 20140506095336) do
   end
 
   add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id", using: :btree
+
+  create_table "reservations", force: true do |t|
+    t.integer  "lesson_id"
+    t.integer  "student_id"
+    t.integer  "purchase_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.string   "reservation_type"
+    t.string   "state"
+    t.integer  "discounter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "students", force: true do |t|
     t.string   "username",   null: false

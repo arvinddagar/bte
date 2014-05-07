@@ -1,0 +1,18 @@
+<div class="available-reservations">
+  <div class="hide" rel="<%= days_reservations_path( lesson_id: @lesson.id,
+    from: DateTime.now, format: 'js' ) %>" remote="<%= true %>"></div>
+  <ul class="accordion"></ul>
+  <div class="more">
+    <div class="load"></div>
+    Loading Lesson Times
+  </div>
+  <div class="load days"></div>
+</div>
+
+<% content_for :javascript do %>
+  <script>
+  $(function(){
+    $.get( $('.available-reservations .hide').first().attr('rel') );
+  });
+</script>
+<% end %>

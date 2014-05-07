@@ -1,0 +1,29 @@
+<% @days.each_with_index do |day, index| %>
+  <li>
+    <div class="title" rel="<%= available_reservations_path( lesson_id: @lesson.id,
+      from: day, format: 'js' ) %>" remote="<%= true %>">
+      <h5>
+        <%= day.strftime '%A, %B %e' %>
+      </h5>
+    </div>
+    <div class="content" id="<%= day %>">
+      <% if index == 0 && reservations.any? %>
+        <% reservations.each_with_index do |r, i| %>
+          <div class="reservation">
+            <%= render 'reservations/reservation', reservation: r %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="load"></div>
+      <% end %>
+    </div>
+  </li>
+<% end %>
+
+<% content_for :javascript do %>
+  <script>
+    $('ul.accordion .title').on('click', function(e){
+      $.get($(this).attr('rel'));
+    });
+  </script>
+<% end %>

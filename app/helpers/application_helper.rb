@@ -26,4 +26,11 @@ module ApplicationHelper
   def javascript_view_name
     @javascript_view_name ||= "#{controller_path.camelcase.gsub('::', '_')}.#{action_name.camelcase}View"
   end
+
+  def present(object, klass = nil)
+    klass ||= "#{object.class}Presenter".constantize
+    presenter = klass.new(object, self)
+    yield presenter if block_given?
+    presenter
+  end
 end

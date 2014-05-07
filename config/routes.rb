@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     resources :students, only: [:update]
     resources :tutors, only: [:index, :show]
     resources :purchases, only: [:new, :create]
-    resources :lessons, only: [:show]
     get 'complete_registration', to: 'students#complete_registration'
   end
 
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
     get 'subcategory', to: 'lessons#sub_category'
   end
 
+  # USERS
   authenticated :user do
     resources :conversations, only: [:index, :show, :new, :create, :send] do
       member do
@@ -39,9 +39,17 @@ Rails.application.routes.draw do
   unauthenticated :user do
     resources :students, only: [:new, :create]
     resources :tutors, only: [:new, :create]
+
   end
 
   # EVERYONE
+  resources :lessons, only: [:show]
+  resources :reservations, only: [:create, :index, :show, :update] do
+    get :available, on: :collection
+    get :days, on: :collection
+    get :confirm, on: :member
+  end
+
   get 'search' => 'lessons#index'
   resources :pages, except: :show
   get ':id', to: 'pages#show', as: :static_page

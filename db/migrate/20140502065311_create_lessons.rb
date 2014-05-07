@@ -12,7 +12,7 @@ class CreateLessons < ActiveRecord::Migration
       t.string :phone_number
       t.integer :level, default: 0
       t.integer :green_zone, default: 1440
-      t.integer :weeks_visible, default: 52
+      t.integer :weeks_visible, default: 1
       t.integer :allowed_people
       t.integer  :lesson_duration, default: 30, null: false
       t.integer  :time_slots_count, default: 0

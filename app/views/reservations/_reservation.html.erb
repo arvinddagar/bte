@@ -1,0 +1,14 @@
+<% present reservation do |reservation_presenter| %>
+  <div class="row">
+    <div class="seven columns">
+      <div class="reservation-time">
+        <%= reservation.time %>
+      </div>
+    </div>
+    <div class="five columns">
+      <div class="reservation-form">
+        <%= reservation_presenter.book_button %>
+      </div>
+    </div>
+  </div>
+<% end %>

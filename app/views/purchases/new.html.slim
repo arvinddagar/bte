@@ -11,6 +11,7 @@ ul.breadcrumb
         script*stripe_script_attrs(@lesson)
         = f.hidden_field :payment_method, value: Purchase::PAYMENT_METHODS[:stripe]
         = hidden_field_tag :stripeToken
-        = hidden_field_tag :lesson_id, @lesson.id
+        = f.hidden_field :lesson_id, value: @lesson.id
+        = hidden_field_tag :reservation, @reservation.attributes.delete_if{|k,v| v.nil? || k == 'state'}.to_json if @reservation
         button.btn.btn-large.btn-block.btn-payment
           = image_tag "payments-cards.png", width: 153, height: 30, class: "cards-pay-image"

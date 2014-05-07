@@ -349,6 +349,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    state_machine (1.2.0)
     temple (0.6.7)
     thor (0.19.1)
     thread_safe (0.3.3)
@@ -429,6 +430,7 @@ DEPENDENCIES
   slim
   spring
   spring-commands-rspec
+  state_machine
   stripe!
   timecop
   title

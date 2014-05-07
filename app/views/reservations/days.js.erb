@@ -1,0 +1,7 @@
+var lis = $('ul.accordion li');
+$('.more').show();
+$('ul.accordion').empty().append(lis);
+$('ul.accordion').append('<%= escape_javascript render("reservations/days", days: @days, reservations: @reservations) %>');
+$('.load.days').hide();
+$('.more').html('<%= escape_javascript render("reservations/more", from: @days.last) %>');
+$('ul.accordion').find('li:first').addClass('active');

@@ -17,8 +17,10 @@ class Lesson < ActiveRecord::Base
   enum level: [:beginner, :intermediate, :advanced]
   friendly_id :name, use: :slugged
   has_many :time_slots, dependent: :destroy
+  has_many :reservations
   belongs_to :tutor, inverse_of: :lessons
   belongs_to :category
+  delegate :time_zone, to: :tutor
 
   class << self
     def past_classes
@@ -33,5 +35,9 @@ class Lesson < ActiveRecord::Base
       wildcard_search = "%#{search}%"
       where('address LIKE :search OR description LIKE :search OR name LIKE :search', search: wildcard_search)
     end
+  end
+
+  def class_name
+    self.class.to_s.underscore
   end
 end

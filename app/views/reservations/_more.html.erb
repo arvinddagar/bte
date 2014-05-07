@@ -1,0 +1,11 @@
+<% unless @days.empty? %>
+  <%= link_to 'See more dates', days_reservations_path(lesson_id: @lesson.id, from: @days.last + 1.day), id: 'more-dates-link', remote: true, class:   'more' %>
+<% end %>
+<% content_for :javascript do %>
+  <script>
+    $('a.more').on('click', function(e){
+      $('.more').hide();
+      $('.load.days').show();
+    });
+  </script>
+<% end %>

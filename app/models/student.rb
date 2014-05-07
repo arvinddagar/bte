@@ -11,6 +11,7 @@ class Student < ActiveRecord::Base
 
   has_many :purchases
   has_many :purchase_accounts
+  has_many :reservations
 
   accepts_nested_attributes_for :user
 
@@ -18,6 +19,10 @@ class Student < ActiveRecord::Base
   validates *COMPLETE_ATTRIBUTES, presence: true, on: :update
 
   delegate :email, to: :user, allow_nil: true
+
+  def to_s
+    username
+  end
 
   def attrs
     {
@@ -31,5 +36,9 @@ class Student < ActiveRecord::Base
 
   def incomplete?
     !complete?
+  end
+
+  def class_name
+    self.class.to_s.underscore
   end
 end

@@ -34,6 +34,7 @@ gem 'kaminari'
 gem 'geocoder'
 gem 'mailboxer'
 gem 'acts_as_commentable'
+gem 'state_machine'
 
 group :development do
   gem 'foreman'
