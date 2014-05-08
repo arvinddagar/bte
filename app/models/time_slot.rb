@@ -1,33 +1,30 @@
 # /app/models/time_slot.rb
 class TimeSlot < ActiveRecord::Base
   DAYS_OF_WEEK = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
-
-  #hash of minutes past midnight mapped to pretty time strings
-  PRETTY_TIMES = Hash[(0..1439).map {|n| [n, "#{(n/60 == 0 || n/60 == 12 ? 12 : n/60 % 12)}:#{(n % 60).to_s.rjust(2,'0')} #{n/60 < 12 ? 'AM' : 'PM'}"]}]
-
+  # hash of minutes past midnight mapped to pretty time strings
+  PRETTY_TIMES = Hash[(0..1439).map { |n| [n, "#{(n/60 == 0 || n/60 == 12 ? 12 : n/60 % 12)}:#{(n % 60).to_s.rjust(2,'0')} #{n/60 < 12 ? 'AM' : 'PM'}"] }]
 
   belongs_to :lesson, counter_cache: true
-
-  validates :starts_at_minutes, inclusion: (0..(24*60*7-1))
-  validates :lesson_duration, numericality: { greater_than: 0, less_than: 7*24*60 }
+  validates :starts_at_minutes, inclusion: (0..(24 * 60 * 7 - 1))
+  validates :lesson_duration, numericality: { greater_than: 0, less_than: 7 * 24 * 60 }
   validate :overlap, on: :create
 
   before_validation :set_lesson_duration, on: :create
 
   def ends_at_minutes
-    (starts_at_minutes + lesson_duration) % (7*24*60)
+    (starts_at_minutes + lesson_duration) % (7 * 24 * 60)
   end
 
   def weekday
-    DAYS_OF_WEEK[(starts_at_minutes / (24*60))]
+    DAYS_OF_WEEK[(starts_at_minutes / (24 * 60))]
   end
 
   def starts_at_time
-    PRETTY_TIMES[starts_at_minutes % (24*60)]
+    PRETTY_TIMES[starts_at_minutes % (24 * 60)]
   end
 
   def ends_at_time
-    PRETTY_TIMES[ends_at_minutes % (24*60)]
+    PRETTY_TIMES[ends_at_minutes % (24 * 60)]
   end
 
   def starts_at_for_week(week_number, options = {})
@@ -43,7 +40,7 @@ class TimeSlot < ActiveRecord::Base
 
   def change_time_zone(previous, current)
     offset = (Time.find_zone(current).utc_offset - Time.find_zone(previous).utc_offset) / 60
-    self.starts_at_minutes = (starts_at_minutes + offset) % (7*24*60)
+    self.starts_at_minutes = (starts_at_minutes + offset) % (7 * 24 * 60)
     save
   end
 
@@ -60,7 +57,7 @@ class TimeSlot < ActiveRecord::Base
 
   def overlap
     lesson.time_slots.each do |ts|
-      errors.add(:base, 'Conflict with existing time slot') and return if overlaps?(ts)
+      errors.add(:base, 'Conflict with existing time slot') && return if overlaps?(ts)
     end
   end
 

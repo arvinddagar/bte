@@ -21,12 +21,7 @@ class PurchasesController < ApplicationController
     lesson = Lesson.friendly.find(params[:purchase][:lesson_id])
     @purchase.amount = lesson.amount
 
-
     if @purchase.save_and_charge! params[:stripeToken]
-      notice = I18n.t('purchases.create.success',
-        count: @purchase.lessons_purchased, lesson: @purchase.lesson
-      )
-
       if params[:reservation]
         @reservation = Reservation.new JSON.load params[:reservation]
         if @reservation.save!
@@ -54,10 +49,12 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchase).permit(:lesson_id, :student_id, :stripe_charge_id,
-                                     :description, :lessons_purchased, :amount,
-                                     :original_lessons_purchased, :coupon_id,
-                                     :original_amount, :discounter_id, :payment_method)
+    params.require(:purchase).permit(:lesson_id, :student_id,
+                                     :stripe_charge_id, :description,
+                                     :lessons_purchased, :amount,
+                                     :original_lessons_purchased,
+                                     :coupon_id, :original_amount,
+                                     :discounter_id, :payment_method)
   end
 
   def reserve

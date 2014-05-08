@@ -1,10 +1,9 @@
 # /app/controllers/reservations_controller.rb
 class ReservationsController < ApplicationController
-
   before_filter :authenticate_user!, except: [:available, :days]
 
   def index
-    ReservationUpdater.call
+    ReservationUpdater.call # Fix me
     @reservations = current_user.tutor.try(:reservations) || current_user.student.try(:reservations)
   end
 
@@ -18,7 +17,7 @@ class ReservationsController < ApplicationController
     from = params[:from] || Time.now
     @lesson = Lesson.friendly.find(params[:lesson_id])
     rg = ReservationGenerator.new(@lesson)
-    @days = rg.starting_on(from.to_date).map {|r| r.starts_at.to_date }.uniq.first(1)
+    @days = rg.starting_on(from.to_date).map { |r| r.starts_at.to_date }.uniq.first(1)
     @reservations = @days.empty? ? [] : rg.for_date(@days.first)
   end
 end

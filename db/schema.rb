@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507050750) do
+ActiveRecord::Schema.define(version: 20140508051455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20140507050750) do
     t.integer  "category_id"
   end
 
+  add_index "lessons", ["category_id"], name: "index_lessons_on_category_id", using: :btree
   add_index "lessons", ["tutor_id"], name: "index_lessons_on_tutor_id", using: :btree
 
   create_table "notifications", force: true do |t|
@@ -185,6 +186,9 @@ ActiveRecord::Schema.define(version: 20140507050750) do
     t.datetime "updated_at"
   end
 
+  add_index "purchase_accounts", ["lesson_id"], name: "index_purchase_accounts_on_lesson_id", using: :btree
+  add_index "purchase_accounts", ["student_id"], name: "index_purchase_accounts_on_student_id", using: :btree
+
   create_table "purchases", force: true do |t|
     t.integer  "lesson_id"
     t.integer  "student_id"
@@ -200,6 +204,9 @@ ActiveRecord::Schema.define(version: 20140507050750) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "purchases", ["lesson_id"], name: "index_purchases_on_lesson_id", using: :btree
+  add_index "purchases", ["student_id"], name: "index_purchases_on_student_id", using: :btree
 
   create_table "receipts", force: true do |t|
     t.integer  "receiver_id"
@@ -228,6 +235,10 @@ ActiveRecord::Schema.define(version: 20140507050750) do
     t.datetime "updated_at"
   end
 
+  add_index "reservations", ["lesson_id"], name: "index_reservations_on_lesson_id", using: :btree
+  add_index "reservations", ["purchase_id"], name: "index_reservations_on_purchase_id", using: :btree
+  add_index "reservations", ["student_id"], name: "index_reservations_on_student_id", using: :btree
+
   create_table "students", force: true do |t|
     t.string   "username",   null: false
     t.integer  "user_id",    null: false
@@ -246,6 +257,8 @@ ActiveRecord::Schema.define(version: 20140507050750) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "time_slots", ["lesson_id"], name: "index_time_slots_on_lesson_id", using: :btree
 
   create_table "tutors", force: true do |t|
     t.string   "name"

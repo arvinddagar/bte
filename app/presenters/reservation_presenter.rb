@@ -34,7 +34,7 @@ class ReservationPresenter < BasePresenter
     if reservation.starts_at - 1.hour < DateTime.now
       link_to 'Join Lesson', reservation_path(reservation), class: 'small round button'
     else
-      link_to "Starts in #{reservation.time_until}", '#', class: "small round button join", disabled: :true, rel: reservation.starts_at
+      link_to "Starts in #{reservation.time_until}", '#', class: 'small round button join', disabled: :true, rel: reservation.starts_at
     end
   end
 
@@ -58,7 +58,7 @@ class ReservationPresenter < BasePresenter
     reservation_attributes = reservation.attributes.slice('lesson_id', 'starts_at', 'ends_at')
     result = []
 
-    result << link_to('Book Now', new_purchase_path(sign_up: true, reservation: reservation_attributes), class: 'tiny round button grey', id: reservation.starts_at.to_s.gsub(" ", "_"), target: '_blank')
+    result << link_to('Book Now', new_purchase_path(sign_up: true, reservation: reservation_attributes), class: 'tiny round button grey', id: reservation.starts_at.to_s.gsub(' ', '_'), target: '_blank')
 
     result.join(' ').html_safe
   end
@@ -75,10 +75,11 @@ class ReservationPresenter < BasePresenter
   end
 
   def book_button_normal
-    reservation_attributes = reservation.attributes.slice('lesson_id', 'starts_at', 'ends_at')
-    result = []
+    reservation_attributes = reservation.attributes
+      .slice('lesson_id', 'starts_at', 'ends_at')
 
-    result << link_to('Book Now', new_purchase_path(sign_up: true, reservation: reservation_attributes), class: 'tiny round button grey', id: reservation.starts_at.to_s.gsub(" ", "_"))
+    result = []
+    result << link_to('Book Now', new_purchase_path(sign_up: true, reservation: reservation_attributes), class: 'tiny round button grey', id: reservation.starts_at.to_s.gsub(' ', '_'))
 
     result.join(' ').html_safe
   end

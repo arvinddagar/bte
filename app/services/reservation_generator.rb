@@ -1,8 +1,6 @@
-# /app/services/reservation_generator.rb
 require 'lazy_list'
-
+# /app/services/reservation_generator.rb
 class ReservationGenerator
-
   def initialize(lesson)
     @lesson = lesson
   end
@@ -14,14 +12,13 @@ class ReservationGenerator
       @lesson.time_slots.sort.each do |time_slot|
         yielder.yield build_reservation(time_slot, week_number)
       end
-    end.select {|n| n.starts_at.to_date == date.to_date && reservable?(n) }
+    end.select { |n| n.starts_at.to_date == date.to_date && reservable?(n) }
     temp
   end
 
-
   def starting_on(date)
     temp = ReservationGenerator.new(@lesson)
-    temp.lazy_list = lazy_list.select{|n| n.starts_at.to_date >= date.to_date}
+    temp.lazy_list = lazy_list.select{ |n| n.starts_at.to_date >= date.to_date }
     temp
   end
 
@@ -48,10 +45,10 @@ class ReservationGenerator
 
   def lazy_list
     @lazy_list ||= LazyList.new do |yielder|
-      @lesson.time_slots.sort.cycle(@lesson.weeks_visible+1).each_with_index do |time_slot, count|
+      @lesson.time_slots.sort.cycle(@lesson.weeks_visible + 1).each_with_index do |time_slot, count|
         yielder.yield build_reservation(time_slot, count / @lesson.time_slots_count)
       end
-    end.select {|n| reservable?(n)}
+    end.select { |n| reservable?(n) }
   end
 
   def reservable?(reservation)
@@ -66,7 +63,7 @@ class ReservationGenerator
   end
 
   def conflicting_ranges
-    @conflicting_ranges ||= [] + @lesson.reservations.with_state(:reserved).reject {|n| n.ends_at.past?}.map {|n| (n.starts_at..n.ends_at)}
+    @conflicting_ranges ||= [] + @lesson.reservations.with_state(:reserved).reject { |n| n.ends_at.past? }.map { |n| (n.starts_at..n.ends_at) }
   end
 
   def accepting_range

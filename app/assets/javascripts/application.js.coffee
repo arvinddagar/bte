@@ -5,7 +5,6 @@
 #= require underscore
 #= require jstz.min
 #= require jquery_plugins/jquery.cookie
-#= require jquery.ui.all
 #= require gmaps-auto-complete
 #= require_tree ./views
 #= require_directory .

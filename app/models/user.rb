@@ -16,12 +16,12 @@ class User < ActiveRecord::Base
 
   class << self
     def find_for_facebook_oauth(auth)
-      student =  where(auth.slice(:provider, :uid)).first_or_create do |user|
-                user.provider = auth.provider
-                user.uid = auth.uid
-                user.email = auth.info.email
-                user.password = Devise.friendly_token[0,20]
-              end
+      student = where(auth.slice(:provider, :uid)).first_or_create do |user|
+                  user.provider = auth.provider
+                  user.uid = auth.uid
+                  user.email = auth.info.email
+                  user.password = Devise.friendly_token[0, 20]
+                end
       student.skip_confirmation!
       Student.find_or_create_by(username: auth.info.name) do |u|
         u.user = student

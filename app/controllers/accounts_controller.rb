@@ -1,3 +1,4 @@
+# /app/controllers/accounts_controller.rb
 class AccountsController < ApplicationController
   before_filter :authenticate_user!
 

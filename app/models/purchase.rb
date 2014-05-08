@@ -1,6 +1,5 @@
 # /app/models/purchase.rb
 class Purchase < ActiveRecord::Base
-
   belongs_to :lesson
   belongs_to :student
   has_many :reservations
@@ -14,7 +13,7 @@ class Purchase < ActiveRecord::Base
     [difference, 0].max # don't return negative values
   end
 
-  #lessons remaining + lessons in progress
+  # lessons remaining + lessons in progress
   def lessons_unfinished
     lessons_purchased - lessons_completed - reservations.count
   end
@@ -37,15 +36,13 @@ class Purchase < ActiveRecord::Base
   def lessons_completed
     completed = 0
     Reservation.where('reservations.lesson_id = ? and reservations.student_id = ? and reservations.state = ?', lesson, student, 'completed').find_in_batches do |reservations|
-        reservations.each do |reservation|
-          completed += 1
-        end
-      end
-    completed.to_i
+      completed += reservations.count
     end
+    completed.to_i
+  end
 
   def amount
-    self[:amount] or original_amount
+    self[:amount] || original_amount
   end
 
   def amount_in_cents
@@ -56,16 +53,14 @@ class Purchase < ActiveRecord::Base
     Purchase.transaction do
       apply_discount!
       raise ActiveRecord::Rollback unless save
-      account.update_attributes!({paid_tokens: (account.paid_tokens + lessons_purchased)})
+      account.update_attributes!(paid_tokens: (account.paid_tokens + lessons_purchased))
       return true if amount == 0
-
       begin
         charge = Stripe::Charge.create(
           amount: amount_in_cents,
           currency: 'usd',
           card: stripe_token,
-          description: %Q({"trainer_email":"#{lesson.tutor.email}","student_email":"#{student.email}","lesson_id":#{lesson_id},"student_id":#{student_id},"original_amount":#{amount}}) )
-
+          description: %Q({"trainer_email":"#{lesson.tutor.email}","student_email":"#{student.email}","lesson_id":#{lesson_id},"student_id":#{student_id},"original_amount":#{amount}}))
         update_attribute(:stripe_charge_id, charge.id)
         return true
       rescue Stripe::CardError => ex

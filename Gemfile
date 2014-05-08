@@ -44,6 +44,10 @@ group :development do
   gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'rack-mini-profiler'
+  gem 'lol_dba'
+  gem 'bullet'
+  gem 'uniform_notifier'
+  gem 'rails_best_practices'
 end
 
 group :development, :test do

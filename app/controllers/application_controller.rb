@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_time_zone
-    if current_user.try(:tutor?) || current_user.try(:student?)
+    if (current_user.try(:tutor?) || current_user.try(:student?)) && current_user.timezone
       Time.zone = current_user.timezone
     elsif cookies[:tz_olson]
       Time.zone = ::OlsonTimezones.timezones_from_olson(cookies[:tz_olson]).first

@@ -18,8 +18,8 @@ class TokenManager
       @reservation.reservation_type = 'paid'
       purchases = Purchase.where(student_id: @reservation.student,
                                  lesson_id: @reservation.lesson,
-                                 description: 'Lesson').order("created_at ASC")
-      @reservation.purchase = purchases.select {|n| n.lessons_unfinished > 0}.first
+                                 description: 'Lesson').order('created_at ASC')
+      @reservation.purchase = purchases.select { |n| n.lessons_unfinished > 0 }.first
       @purchase_account.paid_tokens -= 1
     elsif free?
       @reservation.reservation_type = 'free'
@@ -43,34 +43,34 @@ class TokenManager
     else
       @purchase_account.update_column(token_type, @purchase_account.send(token_type) + 1)
       @reservation.update_column(:purchase_id, nil)
-      @reservation.save and @purchase_account.save
+      @reservation.save && @purchase_account.save
     end
   end
 
   private
 
   def trial?
-    @reservation.reservation_type == 'trial' or
+    @reservation.reservation_type == 'trial' ||
     @purchase_account.trial_tokens > 0
   end
 
   def free?
-    @reservation.reservation_type == 'free' or
+    @reservation.reservation_type == 'free' ||
     @purchase_account.free_tokens > 0
   end
 
   def comped?
-    @reservation.reservation_type == 'comped' or
+    @reservation.reservation_type == 'comped' ||
     @purchase_account.comped_tokens > 0
   end
 
   def paid?
-    @reservation.reservation_type == 'paid' or
+    @reservation.reservation_type == 'paid' ||
     @purchase_account.paid_tokens > 0
   end
 
   def package?
-    # @reservation.reservation_type == 'package' or
+    # @reservation.reservation_type == 'package' ||
     # !package.nil?
   end
 

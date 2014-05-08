@@ -9,10 +9,13 @@ class Reservation < ActiveRecord::Base
 
   state_machine initial: :reserved do
     after_transition reserved: [:canceled], do: :return_token
-    event( :cancel      ){ transition reserved: :canceled    }
-    event( :complete    ){ transition reserved: :completed   }
+    event(:cancel) { transition reserved: :canceled }
+    event(:complete) { transition reserved: :completed }
   end
 
+  def overlaps?(range)
+    (starts_at - range.ends_at) * (range.starts_at - ends_at) > 0
+  end
 
   def cancelable?
     if created_at > 30.minutes.ago
@@ -34,12 +37,12 @@ class Reservation < ActiveRecord::Base
     if conflicts_with_another_reservation?
       errors.add(:base, "You already have a lesson booked at this time.  Click 'Book Now' to pick a different time slot.")
     elsif !corresponds_to_available_reservation? || in_green_zone?
-      errors.add(:base, "This reservation is no longer available")
+      errors.add(:base, 'This reservation is no longer available')
     end
   end
 
   def conflicts_with_another_reservation?
-    Reservation.where("ends_at > ?", Time.now).where("lesson_id = ? OR student_id = ?", lesson, student).with_state(:reserved).each do |reservation|
+    Reservation.where('ends_at > ?', Time.now).where('lesson_id = ? OR student_id = ?', lesson, student).with_state(:reserved).each do |reservation|
       return true if overlaps?(reservation)
     end
     false
@@ -50,8 +53,9 @@ class Reservation < ActiveRecord::Base
   end
 
   def corresponds_to_available_reservation?
-    last_res = ReservationGenerator.new(lesson).take_while {|n| n.starts_at <= starts_at}.last
-    !last_res.nil? && (last_res.starts_at == starts_at && last_res.ends_at == ends_at)
+    last_res = ReservationGenerator.new(lesson)
+                                   .take_while { |n| n.starts_at <= starts_at }.last
+    last_res && (last_res.starts_at == starts_at && last_res.ends_at == ends_at)
   end
 
   def consume_token
