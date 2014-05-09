@@ -20,6 +20,7 @@ class Tutor < ActiveRecord::Base
   validates *COMPLETE_ATTRIBUTES, presence: true, on: :update
 
   has_many :lessons, dependent: :destroy, inverse_of: :tutor
+  has_many :reservations, through: :lessons
 
   def to_s
     name

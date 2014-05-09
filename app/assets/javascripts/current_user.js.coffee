@@ -10,5 +10,3 @@ class Bte.CurrentUser
 
 
   signInTutor: =>
-
-    $(document)

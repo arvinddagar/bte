@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20140508051455) do
 
   create_table "lessons", force: true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.integer  "tutor_id"
     t.string   "slug"
     t.string   "address"
@@ -224,6 +224,7 @@ ActiveRecord::Schema.define(version: 20140508051455) do
 
   create_table "reservations", force: true do |t|
     t.integer  "lesson_id"
+    t.integer  "tutor_id"
     t.integer  "student_id"
     t.integer  "purchase_id"
     t.datetime "starts_at"

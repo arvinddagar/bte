@@ -4,9 +4,9 @@ class ReservationPresenter < BasePresenter
 
   def name
     if current_user.tutor?
-      link_to reservation.student.name, new_student_message_path(reservation.student)
+      link_to reservation.student.username, new_conversation_path(lesson: reservation.lesson)
     else
-      link_to reservation.tutor.name, reservation.tutor
+      link_to reservation.lesson.name, reservation.lesson
     end
   end
 
@@ -32,17 +32,17 @@ class ReservationPresenter < BasePresenter
 
   def join_button
     if reservation.starts_at - 1.hour < DateTime.now
-      link_to 'Join Lesson', reservation_path(reservation), class: 'small round button'
+      link_to 'Lesson Going On', '#', class: 'small round button'
     else
-      link_to "Starts in #{reservation.time_until}", '#', class: 'small round button join', disabled: :true, rel: reservation.starts_at
+      link_to "Starts in #{reservation.time_until}", '#', class: 'small round button join',  disabled: :true, rel: reservation.starts_at
     end
   end
 
   def reschedule_link
     if current_user.student? && reservation.cancelable?
-      link_to 'Reschedule Lesson', reservation_path(reservation), method: 'put', class: 'contact', confirm: 'Are you sure you want to reschedule this lesson?'
+      link_to 'Reschedule Lesson', reservation_path(reservation), method: 'put', class: 'contact', data: { confirm: 'Are you sure you want to reschedule this lesson?' }
     elsif current_user.tutor?
-      link_to 'Cancel Lesson', reservation_path(reservation), method: 'put', class: 'contact', confirm: 'Are you sure you want to cancel this lesson?'
+      link_to 'Cancel Lesson', reservation_path(reservation), method: 'put', class: 'contact',  data: {  confirm: 'Are you sure you want to cancel this lesson?' }
     end
   end
 

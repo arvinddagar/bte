@@ -14,7 +14,6 @@
       .field-group
         = f.label :address
         = f.text_field :address, id: 'gmaps-input-address', placeholder: 'enter address'
-      #gmaps-canvas
       .field-group
         = f.label :amount
         = f.number_field :amount
@@ -35,10 +34,6 @@
       completer = new GmapsCompleter({
       inputField: '#gmaps-input-address',
       errorField: '#gmaps-error',
-      mapElem: '#gmaps-canvas',
-      zoomLevel: 2,
-      mapType: google.maps.MapTypeId.ROADMAP,
-      pos: [51.751724, -1.255284],
       debugOn: false
       });
       completer.autoCompleteInit({

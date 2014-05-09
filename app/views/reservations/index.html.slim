@@ -1,0 +1,21 @@
+- if @reservations.any?
+  - @reservations.each do |reservation|
+    - present reservation do |reservation_presenter|
+        = reservation_presenter.avatar
+        .lesson-info
+          = reservation_presenter.name
+          .lesson-time= reservation_presenter.lesson_time
+          .description= reservation_presenter.description
+        .initiate
+          - if webrtc_enabled_browser?
+            = reservation_presenter.join_button
+            .reschedule-link= reservation_presenter.reschedule_link
+          - else
+            .reschedule-link(style="margin-top: 47px;")= reservation_presenter.reschedule_link
+        .clear
+
+- else
+  p
+    em You have no lessons scheduled
+
+

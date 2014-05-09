@@ -2,7 +2,7 @@ class CreateLessons < ActiveRecord::Migration
   def change
     create_table :lessons do |t|
       t.string :name
-      t.string :description
+      t.text :description
       t.references :tutor, index: true
       t.string :slug, unique: true, index: true
       t.string :address

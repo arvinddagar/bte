@@ -33,4 +33,10 @@ module ApplicationHelper
     yield presenter if block_given?
     presenter
   end
+
+  def webrtc_enabled_browser?
+    # return false if request.user_agent.blank?
+    # request.user_agent.downcase.include? 'chrome'
+    true
+  end
 end

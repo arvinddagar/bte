@@ -13,7 +13,11 @@ class Lesson < ActiveRecord::Base
                          :allowed_people, :green_zone,
                          :weeks_visible
                         ]
-  # validates *COMPLETE_ATTRIBUTES, presence: true
+  validates *COMPLETE_ATTRIBUTES, presence: true
+
+  validates :amount, :allowed_people, numericality: true
+  validates :amount, :allowed_people, numericality: {greater_than: 0}
+
   enum level: [:beginner, :intermediate, :advanced]
   friendly_id :name, use: :slugged
   has_many :time_slots, dependent: :destroy

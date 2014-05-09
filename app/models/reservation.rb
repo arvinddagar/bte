@@ -1,6 +1,11 @@
 # /app/models/reservation.rb
 class Reservation < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
+
+  RESERVATION_TYPES = %W(free paid trial)
+
   belongs_to :lesson
+  belongs_to :tutor
   belongs_to :student
   belongs_to :purchase
 
@@ -30,6 +35,11 @@ class Reservation < ActiveRecord::Base
   def time
     starts_at.in_time_zone(Time.zone).strftime('%l:%M%P - ') + ends_at.in_time_zone(Time.zone).strftime('%l:%M%P')
   end
+
+  def time_until
+    distance_of_time_in_words_to_now(self.starts_at.to_time)
+  end
+
 
   protected
 
@@ -63,6 +73,6 @@ class Reservation < ActiveRecord::Base
   end
 
   def return_token
-    # TokenManager.new(self).return_token
+    TokenManager.new(self).return_token
   end
 end
