@@ -21,6 +21,7 @@ class Tutor < ActiveRecord::Base
 
   has_many :lessons, dependent: :destroy, inverse_of: :tutor
   has_many :reservations, through: :lessons
+  has_many :statements, class_name: 'TutorStatement'
 
   def to_s
     name

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :tutor_statements
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
@@ -32,6 +34,9 @@ Rails.application.routes.draw do
         post :trash
         post :untrash
       end
+    end
+    resources :statements, only: :show, controller: 'teacher_statements', as: 'teacher_statements' do
+      get :show, defaults: {format: 'pdf'}, on: :member
     end
   end
 
