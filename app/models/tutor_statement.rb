@@ -7,8 +7,7 @@ class TutorStatement < ActiveRecord::Base
 
   validates_uniqueness_of :tutor_id, scope: [:year, :month, :week]
 
-  scope :previous_month, -> { where(month: Time.now.prev_month.month, year: Time.now.prev_month.year) }
-  scope :current_month, -> { where(month: Time.now.month, year: Time.now.year) }
+  scope :previous_week, -> { where(week: Time.now.prev_week.wday, month: Time.now.prev_week.month, year: Time.now.prev_week.year) }
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where('published IS NULL OR published = ?', false).where(finalized: true) }
   scope :unfinalized, -> { where('finalized IS NULL OR finalized = ?', false) }
@@ -75,7 +74,7 @@ class TutorStatement < ActiveRecord::Base
   end
 
   def finalized?
-    changed? ? !!tutorStatement.find_by_id(self).try(:finalized) : !!self[:finalized]
+    changed? ? !!TutorStatement.find(self).try(:finalized) : !!self[:finalized]
   end
 
   def save
@@ -111,7 +110,7 @@ class TutorStatement < ActiveRecord::Base
   end
 
   def date_range
-    t = Time.find_zone(STATEMENT_TIME_ZONE).local(year,month)
-    (t..t.end_of_month)
+    time = Time.find_zone(STATEMENT_TIME_ZONE).now.prev_week
+    (time..time.end_of_week)
   end
 end

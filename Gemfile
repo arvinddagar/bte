@@ -36,7 +36,6 @@ gem 'mailboxer'
 gem 'acts_as_commentable'
 gem 'state_machine'
 gem 'whenever', require: false
-gem 'week_of_month'
 
 group :development do
   gem 'foreman'

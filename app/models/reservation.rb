@@ -40,6 +40,16 @@ class Reservation < ActiveRecord::Base
     distance_of_time_in_words_to_now(self.starts_at.to_time)
   end
 
+  def gross_payable_value
+    case reservation_type.to_sym
+    when :free, :trial
+      0.0
+    when :paid
+      purchase.original_amount / purchase.original_lessons_purchased rescue 0.0
+    when :comped, :package
+      teacher.single_lesson_amount
+    end
+  end
 
   protected
 

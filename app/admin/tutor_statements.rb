@@ -11,8 +11,8 @@ ActiveAdmin.register TutorStatement do
   scope 'Old Unpublished' do |statements|
     statements.past.unpublished
   end
-  scope :previous_month
-  scope :current_month
+
+  scope :previous_week
 
   filter :month, as: :select, collection: Proc.new {(1..12).each_with_object({}) {|i,h| h[Date::MONTHNAMES[i]] = i}}
   filter :year, as: :select, collection: Proc.new {(2013..Time.now.year)}
@@ -24,9 +24,7 @@ ActiveAdmin.register TutorStatement do
     end
     column :month_name, sortable: :month
     column :year
-    # column 'Lessons Count', sortable: :lesson_count do |statement|
-    #   statement.reservations.where(reservation_type: [:comped, :paid, :package]).count
-    # end
+
     column :lesson_count, sortable: :lesson_count
     column 'Reservations Gross Payable' do |statement|
       number_to_currency statement.reservations_gross_payable
@@ -36,7 +34,6 @@ ActiveAdmin.register TutorStatement do
     end
     column 'Commission Value' do |statement|
       number_to_currency statement.commission_value
-      #number_to_currency(statement.reservations_gross_payable - statement.reservations_net_payable)
     end
     column 'Miscellaneous Payable' do |statement|
       number_to_currency statement.miscellaneous_payable
@@ -110,23 +107,6 @@ ActiveAdmin.register TutorStatement do
         column :actions do |reservation|
           links = []
           links << link_to('View', admin_reservation_path(reservation))
-          links.join(' ').html_safe
-        end
-      end
-    end
-
-    panel "Miscellaneous Line Items".html_safe do
-      div do
-        link_to 'CREATE', new_admin_tutor_statement_miscellaneous_line_item_path(tutor_statement_id: statement.id)
-      end
-      table_for statement.tutor_statement_miscellaneous_line_items do
-        column :description
-        column :amount do |item|
-          number_to_currency item.amount
-        end
-        column :actions do |item|
-          links = []
-          links << link_to('Delete', admin_tutor_statement_miscellaneous_line_item_path(item), method: :delete)
           links.join(' ').html_safe
         end
       end
