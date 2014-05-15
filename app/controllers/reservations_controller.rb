@@ -4,21 +4,21 @@ class ReservationsController < ApplicationController
 
   def index
     ReservationUpdater.call # Fix me
-    reservations = current_user.tutor.try(:reservations) || current_user.student.try(:reservations)
+    reservations  = current_user.tutor.try(:reservations) || current_user.student.try(:reservations)
     @reservations = reservations.with_state(:reserved)
   end
 
   def available
-    @lesson = Lesson.friendly.find(params[:lesson_id])
-    @from = params[:from]
+    @lesson       = Lesson.friendly.find(params[:lesson_id])
+    @from         = params[:from]
     @reservations = ReservationGenerator.new(@lesson).for_date(@from)
   end
 
   def days
-    from = params[:from] || Time.now
-    @lesson = Lesson.friendly.find(params[:lesson_id])
-    rg = ReservationGenerator.new(@lesson)
-    @days = rg.starting_on(from.to_date).map { |r| r.starts_at.to_date }.uniq.first(1)
+    from          = params[:from] || Time.now
+    @lesson       = Lesson.friendly.find(params[:lesson_id])
+    rg            = ReservationGenerator.new(@lesson)
+    @days         = rg.starting_on(from.to_date).map { |r| r.starts_at.to_date }.uniq.first(1)
     @reservations = @days.empty? ? [] : rg.for_date(@days.first)
   end
 

@@ -6,8 +6,8 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
   def new
-    @purchase     = Purchase.new
-    @lesson      = Lesson.friendly.find(params[:lesson] || params[:reservation][:lesson_id])
+    @purchase = Purchase.new
+    @lesson   = Lesson.friendly.find(params[:lesson] || params[:reservation][:lesson_id])
     if params[:reservation]
       @reservation = current_user.student.reservations.build reservation_params
       reserve if TokenManager.new(@reservation).bookable?
@@ -15,11 +15,11 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @purchase = current_user.student.purchases.new(purchase_params)
-    @purchase.description = 'Lesson'
+    @purchase                   = current_user.student.purchases.new(purchase_params)
+    @purchase.description       = 'Lesson'
     @purchase.lessons_purchased = 1
-    lesson = Lesson.friendly.find(params[:purchase][:lesson_id])
-    @purchase.amount = lesson.amount
+    lesson                      = Lesson.friendly.find(params[:purchase][:lesson_id])
+    @purchase.amount            = lesson.amount
 
     if @purchase.save_and_charge! params[:stripeToken]
       if params[:reservation]
@@ -65,7 +65,7 @@ class PurchasesController < ApplicationController
         redirect_to reservations_path, notice: 'Your booking is confirmed. You will receive an email shortly with lesson details.'
       end
     else
-      redirect_to teacher_path(@teacher), notice: @reservation.errors.full_messages.to_sentence
+      redirect_to tutor_path(@tutor), notice: @reservation.errors.full_messages.to_sentence
     end
   end
 
