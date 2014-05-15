@@ -4,8 +4,8 @@ class LessonsController < ApplicationController
 
   def index
     if params[:search]
-      @lessons               = []
-      @lessons               = Lesson.search(params[:search])
+      @lessons = []
+      @lessons = Lesson.search params[:search], page: params[:page], per_page: 20
       lessons_based_location = Lesson.near(params[:search])
       if  lessons_based_location.length > 0
         lessons_based_location.each do |lesson|

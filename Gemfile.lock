@@ -140,6 +140,14 @@ GEM
     dotenv-rails (0.11.1)
       dotenv (= 0.11.1)
     ejs (1.1.1)
+    elasticsearch (0.4.11)
+      elasticsearch-api (= 0.4.11)
+      elasticsearch-transport (= 0.4.11)
+    elasticsearch-api (0.4.11)
+      multi_json
+    elasticsearch-transport (0.4.11)
+      faraday
+      multi_json
     email_validator (1.4.0)
       activemodel
     erubis (2.7.0)
@@ -344,6 +352,10 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    searchkick (0.7.4)
+      activemodel
+      elasticsearch (~> 0.4.11)
+      hashie
     sexp_processor (4.4.3)
     shoulda-matchers (2.6.1)
       activesupport (>= 3.0.0)
@@ -453,6 +465,7 @@ DEPENDENCIES
   recipient_interceptor
   rspec-rails (>= 2.14)
   sass-rails (~> 4.0.3)
+  searchkick
   shoulda-matchers
   simple_form
   simplecov

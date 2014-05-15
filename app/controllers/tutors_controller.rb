@@ -23,9 +23,6 @@ class TutorsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def complete_registration
     @tutor = current_user.tutor
   end

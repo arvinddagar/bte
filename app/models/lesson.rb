@@ -1,7 +1,7 @@
 # /app/models/lesson.rb
 class Lesson < ActiveRecord::Base
   extend FriendlyId
-
+  searchkick
   acts_as_commentable
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
@@ -35,10 +35,10 @@ class Lesson < ActiveRecord::Base
       where('id < ?', 1000) # Fix me use reservations
     end
 
-    def search(search)
-      wildcard_search = "%#{search}%"
-      where('address LIKE :search OR description LIKE :search OR name LIKE :search', search: wildcard_search)
-    end
+    # def search(search)
+    #   wildcard_search = "%#{search}%"
+    #   where('address LIKE :search OR description LIKE :search OR name LIKE :search', search: wildcard_search)
+    # end
   end
 
   def class_name

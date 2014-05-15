@@ -36,6 +36,7 @@ gem 'mailboxer'
 gem 'acts_as_commentable'
 gem 'state_machine'
 gem 'whenever', require: false
+gem 'searchkick'
 
 group :development do
   gem 'foreman'
